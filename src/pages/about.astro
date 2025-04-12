@@ -2,6 +2,8 @@
 import Layout from '@/layouts/ServicePost.astro';
 const tags = ['skips', 'skip refurbishment', 'part exchange', 'sheeting systems', 'new skips', 'skip parts', 'roll-on roll-on skips', 'wheelie bins', 'containers', 'new containers', 'container refurbishment' ];
 const description = `How did we get here?`;
+
+import ImageRender from "@/components/ImageRender.astro";
 ---
 
 <Layout
@@ -15,21 +17,14 @@ const description = `How did we get here?`;
 		Recognising the scarcity of service, manufacturing, and spare parts resources within the Scottish waste and recycling industry, Skip Manufacturers UK has launched a dedicated division to cater to these specific needs.
 	</p>
 
-
 	<p>
 		Our experienced team stands ready to manufacture, refurbish, and repair all types of skips and waste containers, from the smallest builders’ skips to the most extensive roll-on-off compactors. We provide comprehensive inspection, service, fabrication, and repair facilities to ensure your containers remain in pristine condition.
 	</p>
 
-	<div
-  class="border-3 border-black rounded-2xl h-80 w-full shadow-card hover:shadow-hover flex transition relative overflow-hidden">
-  <div class="h-80 w-full absolute flex justify-center items-center">
-    <img
-      class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/images/about-1.webp"
-      alt="open container recently refurbished">
-  </div>
-</div>
-
+	<ImageRender
+  source="/src/assets/about-1.webp"
+  alt="open container recently refurbished"
+	/>
 
 	<p>
 		In addition to our core services, we offer steam cleaning, shot blasting, painting, logo application, graphics customization, and spare parts procurement.
@@ -39,16 +34,10 @@ const description = `How did we get here?`;
 		We conduct thorough inspections of our customers’ equipment, providing valuable reports on its condition, safety, and lifespan. We then suggest tailored solutions to maintain your fleet of containers in top-notch condition, ready for immediate use.
 	</p>
 
-	<div
-  class="border-3 border-black rounded-2xl h-80 w-full shadow-card hover:shadow-hover flex transition relative overflow-hidden">
-  <div class="h-80 w-full absolute flex justify-center items-center">
-    <img
-      class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/images/about-2.webp"
-      alt="large skip ready for client delivery">
-  </div>
-</div>
-
+	<ImageRender
+  source="/src/assets/about-2.webp"
+  alt="large skip ready for client delivery"
+	/>
 
 	<p>
 		In today’s cost-conscious and competitive environment, with rising waste disposal costs, it is crucial that your containers project a professional image and adhere to ever-evolving regulations regarding visibility, containment, load restraint, and transportation.
@@ -58,16 +47,10 @@ const description = `How did we get here?`;
 		Skip Manufacturer UK aspires to be Scotland’s premier skip manufacturer and container repair facility, committed to providing exceptional service and support to our valued customers.
 	</p>
 
-	<div
-  class="border-3 border-black rounded-2xl h-80 w-full shadow-card hover:shadow-hover flex transition relative overflow-hidden">
-  <div class="h-80 w-full absolute flex justify-center items-center">
-    <img
-      class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/images/about-3.webp"
-      alt="stacked skips which have been fully refurbished">
-  </div>
-</div>
-
+	<ImageRender
+  source="/src/assets/about-3.webp"
+  alt="stacked skips which have been fully refurbished"
+	/>
 
 	<p>
 		Please feel free to <a href="/contact">contact us</a> for further information or inquire about your specific equipment needs.
