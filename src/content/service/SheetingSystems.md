@@ -14,7 +14,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/src/assets/sheet-1.webp"
+      src="/public/images/sheet-1.webp"
       alt="roll on roll off skip with sheeting system">
   </div>
 </div>
@@ -26,7 +26,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/src/assets/sheet-2.webp"
+      src="/public/images/sheet-2.webp"
       alt="roll on roll off skip ready for client delivery">
   </div>
 </div>
@@ -40,7 +40,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/src/assets/sheet-3.webp"
+      src="/public/images/sheet-3.webp"
       alt="roll on roll off skip needing new sheeting system fitted">
   </div>
 </div>
