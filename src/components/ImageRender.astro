@@ -1,16 +1,13 @@
 ---
-// NewSkips.astro
 import { Image } from "astro:assets";
-
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,webp}");
-
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
+);
 const {
   source = "",
   alt = "",
 } = Astro.props;
-
 const skipImage = await images[source]();
-
 
 ---
 
