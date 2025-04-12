@@ -20,7 +20,7 @@ pubDate: "Jun 19 2024"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/new-skips-1.webp"
+      src="/images/new-skips-1.webp"
       alt="unfinished skips ready for respraying"
     />
   </div>
@@ -71,7 +71,7 @@ pubDate: "Jun 19 2024"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/new-skips-2.webp"
+      src="/images/new-skips-2.webp"
       alt="finished skips painted yellow, ready for delivery"
     />
   </div>

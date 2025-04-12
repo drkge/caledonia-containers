@@ -15,7 +15,7 @@ postImages: ["foo", "moo", "boo"]
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/refurb-1.webp"
+      src="/images/refurb-1.webp"
       alt="container needing refurbishment">
   </div>
 </div>
@@ -27,7 +27,7 @@ postImages: ["foo", "moo", "boo"]
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/refurb-2.webp"
+      src="/images/refurb-2.webp"
       alt="refurbished skip">
   </div>
 </div>
@@ -39,7 +39,7 @@ postImages: ["foo", "moo", "boo"]
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/refurb-3.webp"
+      src="/images/refurb-3.webp"
       alt="roll on roll off skip receiving protective coating">
   </div>
 </div>
@@ -51,7 +51,7 @@ postImages: ["foo", "moo", "boo"]
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/refurb-4.webp"
+      src="/images/refurb-4.webp"
       alt="resprayed container">
   </div>
 </div>

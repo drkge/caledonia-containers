@@ -18,7 +18,7 @@ pubDate: "Jul 15 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/rollon-1.webp"
+      src="/images/rollon-1.webp"
       alt="rusty roll on roll off skip ready to be refurbished">
   </div>
 </div>
@@ -32,7 +32,7 @@ pubDate: "Jul 15 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/rollon-2.webp"
+      src="/images/rollon-2.webp"
       alt="roll on roll off skip being prepared in workshow">
   </div>
 </div>
@@ -46,7 +46,7 @@ pubDate: "Jul 15 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/rollon-3.webp"
+      src="/images/rollon-3.webp"
       alt="fully refurbished roll on roll off skip">
   </div>
 </div>

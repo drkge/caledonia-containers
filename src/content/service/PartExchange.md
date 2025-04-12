@@ -14,7 +14,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/partex-1.webp"
+      src="/images/partex-1.webp"
       alt="part exhange containers ready for delivery">
   </div>
 </div>
@@ -26,7 +26,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/partex-2.webp"
+      src="/images/partex-2.webp"
       alt="user container">
   </div>
 </div>
@@ -38,7 +38,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/partex-3.webp"
+      src="/images/partex-3.webp"
       alt="refurbished skips ready for part exchange">
   </div>
 </div>
@@ -50,7 +50,7 @@ pubDate: "Jul 08 2022"
   <div class="h-80 w-full absolute flex justify-center items-center">
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
-      src="/public/images/partex-4.webp"
+      src="/images/partex-4.webp"
       alt="taking delivery of part exchange skips">
   </div>
 </div>
