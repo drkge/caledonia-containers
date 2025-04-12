@@ -1,0 +1,61 @@
+---
+const today = new Date();
+import { Icon } from "astro-icon/components";
+import Contact from "./Contact.astro";
+import { Image } from "astro:assets";
+
+---
+
+<footer
+  class="flex flex-col items-center container mx-auto p-10 text-center gap-6 pb-40"
+>
+
+
+  <Contact />
+
+
+  
+
+  &copy; {today.getFullYear()} Skip Manufacturer UK Limited. All rights reserved.
+  <div class="flex items-center gap-6 text-5xl">
+    <a
+      href="https://dustybins.co.uk"
+      target="_blank"
+      class=" h-16 w-16 rounded-md border-1 border-black  bg-pgreen shadow-card hover:shadow-hover transition relative flex items-center justify-center"
+    >
+    <Image
+    class="object-cover absolute hover:scale-105 transition h-16 w-16"
+    src={"/src/assets/dustybins.webp"}
+    alt="Sorolla, photo wiki"
+    width={50}
+    height={50}
+  />
+    </a>
+    <a
+      href="https://www.linkedin.com/in/grahamsmuk/"
+      target="_blank"
+      class="border-1 border-black  p-1 rounded-full bg-pblue shadow-card hover:shadow-hover transition"
+    >
+      <Icon name="linkedin" />
+    </a>
+
+   <a
+      href="https://skipbits.co.uk"
+      target="_blank"
+      class=" h-16 w-16 rounded-md  border-1 border-black bg-white shadow-card hover:shadow-hover transition relative flex items-center justify-center"
+    >
+    <Image
+    class="object-cover absolute hover:scale-105 transition h-14 w-14"
+    src={"/src/assets/skipbits.png"}
+    alt="Sorolla, photo wiki"
+    width={40}
+    height={40}
+  />
+    </a>
+  </div>
+
+<p>Built by <a href="https://wolfdev.co.uk" class="hover:underline underline-offset-4 hover:text-ppurlple">wolfdev.co.uk</a>.</p>
+  
+
+  
+</footer>

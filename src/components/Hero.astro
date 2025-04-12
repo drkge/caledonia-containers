@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,gif}"
+);
+---
+
+<section class="py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
+  <div class="flex flex-col gap-6 justify-start items-start md:w-1/2">
+    <h1 class="text-xl">Skip Manufacturer UK</h1>
+    <p class="text-6xl font-bold">Everything For Waste Carriers.</p>
+    <p>We provide comprehensive metal fabrication services, including skips, shot blasting, welding, repairs, refurbishments, sales, and spare parts. We offer a one-stop solution for all your metal needs.
+    </p>
+    <p>
+      We also offer professional spray painting, modifications, and conversions for all types of containers, trucks, trailers, waste recycling plants, and agricultural equipment.
+    </p>
+    <a
+      rel="noopener noreferrer"
+      href="/services"
+      target="_blank"
+      class="bg-pgreen px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition"
+    >
+      Get In Touch
+    </a>
+  </div>
+  <div
+    class="md:w-1/2 object-contain flex items-center justify-center p-10 group"
+  >
+      <div
+        class="bg-pblue border-3 border-black rounded-2xl h-52 w-60 shadow-card group-hover:shadow-hover flex transition"
+      >
+        <div class="h-80 w-60 overflow-hidden relative -mt-30 rounded-2xl">
+          <Image
+            class="object-contain absolute bottom-0 group-hover:scale-105 transition"
+            src={images["/src/assets/skip-man.png"]()}
+            alt="Sorolla, photo wiki"
+          />
+        </div>
+      </div>
+  </div>
+</section>

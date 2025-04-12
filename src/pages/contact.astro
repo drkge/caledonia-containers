@@ -1,0 +1,50 @@
+---
+import Layout from '@/layouts/BlogPost.astro';
+
+const tags = ['astro', 'react', 'svelte', 'vue', 'web-components'];
+const description = "Get in touch with us";
+---
+
+<Layout
+	tags={tags}
+	icon="beach"
+	title="Get In Touch"
+	description= {description}
+	pubDate={new Date('August 08 2021')}
+	heroImage="/src/assets/fran.jpg"
+>
+<h3>Skip Manufacturers UK</h3>
+
+
+<div class="flex flex-col gap-1">
+	<h4>Contact Information</h4>
+	<div>
+		<span>Telephone:</span>
+		<span><a href="tel:07951494238">07951 494238</a></span>
+	</div>
+	
+<div class="flex flex-row gap-2 items-center">
+	<span>24 Hour Mobile:</span>
+	<span><a href="tel:07968122210">07968 122210</a></span>
+</div>
+
+<div>
+	<span>Email:</span>
+	<span><a href="mailto:skipmanufacturers@outlook.com">skipmanufacturers@outlook.com</a></span>
+</div>
+</div>
+
+<div>
+	<iframe width="100%" height="300" src="https://maps.google.com/maps?width=300&amp;height=300&amp;hl=en&amp;q=1%1Cameron%St,%Coatbridge,%20ML5%202EJ+&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+</div>
+
+<div class="flex flex-col gap-1">
+	<strong>Skip Manufacturer UK Limited,</strong>
+	<span>1 Cameron St,</span>
+	<span>Coatbridge</span>
+	<span>Scotland</span>
+	<span>ML5 2EJ</span>
+</div>
+
+
+</Layout>
