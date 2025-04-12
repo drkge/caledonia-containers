@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("service")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 import { Icon } from "astro-icon/components";

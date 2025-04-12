@@ -15,7 +15,6 @@ Welcome to my personal portfolio demo repository! This project is a demonstratio
 - **tailwind.config.mjs**: Configuration file for Tailwind CSS.
 - **tsconfig.json**: TypeScript configuration file.
 
-
 ### 🧭 /src structure
 
 The `/src` directory contains the main source code for the project. Below is an overview of its structure:
@@ -23,12 +22,33 @@ The `/src` directory contains the main source code for the project. Below is an 
 ```
 src
 ├── assets
-│   ├── adriana.jpg
-│   ├── euro.jpg
-│   ├── fran.jpg
-│   └── hero.png
+│   ├── about-1.webp
+│   ├── about-2.webp
+│   ├── about-3.webp
+│   ├── dustybins.webp
+│   ├── new-skips-1.webp
+│   ├── new-skips-2.webp
+│   ├── partex-1.webp
+│   ├── partex-2.webp
+│   ├── partex-3.webp
+│   ├── partex-4.webp
+│   ├── refurb-1.webp
+│   ├── refurb-2.webp
+│   ├── refurb-3.webp
+│   ├── partex-4.webp
+│   ├── rollon-1.webp
+│   ├── rollon-2.webp
+│   ├── rollon-3.webp
+│   ├── sheet-1.webp
+│   ├── sheet-2.webp
+│   ├── sheet-3.webp
+│   ├── skip-man.png
+│   ├── skipbits.png
+│   ├── wheelie-1.webp
+│   └── wheelie-2.webp
 ├── components
 │   ├── BaseHead.astro
+│   ├── Contact.astro
 │   ├── Footer.astro
 │   ├── FormattedDate.astro
 │   ├── Header.astro
@@ -37,25 +57,21 @@ src
 │   └── WhatIDo.astro
 ├── consts.ts
 ├── content
-│   └── blog
+│   └── service
 │       └── content in markdown format
 ├── content.config.ts
 ├── icons
-│   ├── 1.svg
-│   ├── 2.svg
-│   ├── 3.svg
-│   ├── 4.svg
-│   ├── 5.svg
-│   ├── beach.svg
-│   ├── github.svg
+│   ├── email.svg
+│   ├── four.svg
 │   ├── linkedin.svg
-│   ├── paint.svg
+│   ├── phone.svg
+│   ├── sun.svg
 │   └── web.svg
 ├── layouts
-│   └── BlogPost.astro
+│   └── ServicePost.astro
 ├── pages
 │   ├── about.astro
-│   ├── blog
+│   ├── service
 │   │   ├── index.astro
 │   │   └── [...slug].astro
 │   ├── index.astro
@@ -69,20 +85,19 @@ src
 
 - **assets**: Contains image files used in the project.
 - **components**: Contains reusable UI components built with Astro.
-- **content**: Contains blog content in Markdown format.
+- **content**: Contains service content in Markdown format.
 - **content.config.ts**: Configuration file for content collections.
 - **icons**: Contains SVG icon files used in the project.
 - **layouts**: Contains layout components.
-  - `BlogPost.astro`: Layout component for blog posts.
+  - `ServicePost.astro`: Layout component for service posts.
 - **pages**: Contains the main pages of the site.
-  - `blog/index.astro`: Blog index page.
-  - `blog/[...slug].astro`: Dynamic route for individual blog posts.
+  - `service/index.astro`: Service index page.
+  - `service/[...slug].astro`: Dynamic route for individual service posts.
 - **styles**: Contains global and component-specific CSS files.
   - `global.css`: Global styles for the project.
   - `hamburgers.css`: Styles for the hamburger menu.
 
 This structure helps in organizing the project files and makes it easier to maintain and scale the project.
-
 
 ## 🚀 Getting Started
 
