@@ -1,0 +1,26 @@
+---
+// NewSkips.astro
+import { Image } from "astro:assets";
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*.{jpeg,jpg,png,gif,webp}");
+
+const {
+  source = "",
+  alt = "",
+} = Astro.props;
+
+const skipImage = await images[source]();
+
+
+---
+
+
+<div class="border-3 border-black rounded-2xl h-80 w-full shadow-card hover:shadow-hover flex transition relative overflow-hidden">
+  <div class="h-80 w-full absolute flex justify-center items-center">
+    <Image
+      class="object-cover hover:scale-105 transition h-80 w-full"
+      src={skipImage.default}
+      alt={alt}
+    />
+  </div>
+</div>

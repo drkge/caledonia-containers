@@ -3,6 +3,9 @@ const today = new Date();
 import { Icon } from "astro-icon/components";
 import Contact from "./Contact.astro";
 import { Image } from "astro:assets";
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
+);
 ---
 
 <footer
@@ -22,13 +25,13 @@ import { Image } from "astro:assets";
       target="_blank"
       class=" h-16 w-16 rounded-md border-1 border-black shadow-card hover:shadow-hover transition relative flex items-center justify-center"
     >
+
     <Image
-    class="object-cover absolute hover:scale-105 transition h-16 w-16"
-    src={"/images/dustybins.webp"}
+    class="object-cover absolute hover:scale-105 transition h-14 w-14"
+    src={images["/src/assets/dustybins.webp"]()}
     alt="dusty bins logo"
-    width={50}
-    height={50}
-  />
+    />
+
     </a>
     <a
       href="https://www.linkedin.com/in/grahamsmuk/"
@@ -45,11 +48,9 @@ import { Image } from "astro:assets";
     >
     <Image
     class="object-cover absolute hover:scale-105 transition h-14 w-14"
-    src={"/images/skipbits.png"}
+    src={images["/src/assets/skipbits.png"]()}
     alt="skip bits logo"
-    width={40}
-    height={40}
-  />
+    />
     </a>
   </div>
 
