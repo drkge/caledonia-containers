@@ -15,7 +15,7 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/sheet-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="roll on roll off skip with sheeting system">
   </div>
 </div>
 
@@ -27,7 +27,7 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/sheet-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="roll on roll off skip ready for client delivery">
   </div>
 </div>
 
@@ -41,6 +41,6 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/sheet-3.webp"
-      alt="Sorolla, photo wiki">
+      alt="roll on roll off skip needing new sheeting system fitted">
   </div>
 </div>

@@ -17,7 +17,7 @@ pubDate: "Jun 19 2024"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/new-skips-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="unfinished skips ready for respraying">
   </div>
 </div>
 
@@ -47,6 +47,6 @@ pubDate: "Jun 19 2024"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/new-skips-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="finished skips painted yellow, ready for delivery">
   </div>
 </div>

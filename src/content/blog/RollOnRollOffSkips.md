@@ -19,7 +19,7 @@ pubDate: "Jul 15 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/rollon-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="rusty roll on roll off skip ready to be refurbished">
   </div>
 </div>
 
@@ -33,7 +33,7 @@ pubDate: "Jul 15 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/rollon-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="roll on roll off skip being prepared in workshow">
   </div>
 </div>
 
@@ -47,6 +47,6 @@ pubDate: "Jul 15 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/rollon-3.webp"
-      alt="Sorolla, photo wiki">
+      alt="fully refurbished roll on roll off skip">
   </div>
 </div>

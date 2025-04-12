@@ -16,7 +16,7 @@ postImages: ["foo", "moo", "boo"]
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/refurb-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="container needing refurbishment">
   </div>
 </div>
 
@@ -28,7 +28,7 @@ postImages: ["foo", "moo", "boo"]
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/refurb-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="refurbished skip">
   </div>
 </div>
 
@@ -40,7 +40,7 @@ postImages: ["foo", "moo", "boo"]
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/refurb-3.webp"
-      alt="Sorolla, photo wiki">
+      alt="roll on roll off skip receiving protective coating">
   </div>
 </div>
 
@@ -52,6 +52,6 @@ postImages: ["foo", "moo", "boo"]
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/refurb-4.webp"
-      alt="Sorolla, photo wiki">
+      alt="resprayed container">
   </div>
 </div>

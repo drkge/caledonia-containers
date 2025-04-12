@@ -15,7 +15,7 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/partex-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="part exhange containers ready for delivery">
   </div>
 </div>
 
@@ -27,7 +27,7 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/partex-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="user container">
   </div>
 </div>
 
@@ -39,7 +39,7 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/partex-3.webp"
-      alt="Sorolla, photo wiki">
+      alt="refurbished skips ready for part exchange">
   </div>
 </div>
 
@@ -51,6 +51,6 @@ pubDate: "Jul 08 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/partex-4.webp"
-      alt="Sorolla, photo wiki">
+      alt="taking delivery of part exchange skips">
   </div>
 </div>

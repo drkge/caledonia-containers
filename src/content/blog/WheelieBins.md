@@ -13,7 +13,7 @@ pubDate: "Jul 22 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/wheelie-1.webp"
-      alt="Sorolla, photo wiki">
+      alt="finish and unfinished wheelie bins">
   </div>
 </div>
 
@@ -25,6 +25,6 @@ pubDate: "Jul 22 2022"
     <img
       class="object-cover hover:scale-105 transition h-80 w-full"
       src="/src/assets/wheelie-2.webp"
-      alt="Sorolla, photo wiki">
+      alt="close up of finished and unpainted wheelie bins">
   </div>
 </div>
