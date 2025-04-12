@@ -1,7 +1,7 @@
 ---
 title: "Wheelie Bins"
 description: "Find the perfect wheelie bin for your needs with our extensive range of sizes and colours."
-icon: "2"
+icon: "web"
 pubDate: "Jul 22 2022"
 ---
 

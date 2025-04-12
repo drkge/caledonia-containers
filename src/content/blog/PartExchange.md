@@ -1,7 +1,7 @@
 ---
 title: "Part Exchange"
 description: "Trade in Your Worn-Out Containers for Shiny New Ones"
-icon: "2"
+icon: "web"
 pubDate: "Jul 08 2022"
 ---
 

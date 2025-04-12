@@ -1,7 +1,7 @@
 ---
 title: "Sheeting Systems"
 description: "Protect your containers and skips from the elements and spills with our bespoke sheeting systems."
-icon: "3"
+icon: "four"
 pubDate: "Jul 08 2022"
 ---
 

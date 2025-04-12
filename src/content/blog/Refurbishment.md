@@ -1,7 +1,7 @@
 ---
 title: "Refurbishment"
 description: "Embrace Sustainability and Revitalise Your Container Fleet"
-icon: "1"
+icon: "sun"
 pubDate: "Jul 08 2022"
 postImages: ["foo", "moo", "boo"]
 ---

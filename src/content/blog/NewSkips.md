@@ -3,7 +3,7 @@ title: "New Skips"
 description:
   "Built to last, our sturdy, durable skips meet all your waste removal needs.
   "
-icon: "3"
+icon: "sun"
 pubDate: "Jun 19 2024"
 ---
 
