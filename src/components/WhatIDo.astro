@@ -17,10 +17,10 @@ const getRandomClass = () => {
 };
 ---
 
-<section class="flex flex-col text-center gap-4 " >
+<section class="flex flex-col text-center gap-6 pb-20" >
   <h2 class="text-4xl font-bold">How we can help you</h2>
   <p class="text-pblack">Our comprehensive suite of skip professional services caters to a diverse clientele, ranging from homeowners to commercial developers.</p>
-  <divul class="flex flex-wrap justify-center gap-8 py-20">
+  <div class="flex flex-wrap justify-center gap-6">
     {
       posts.map((post) => {
         const randomClass = getRandomClass();
@@ -39,5 +39,5 @@ const getRandomClass = () => {
         );
       })
     }
-  </divul>
+  </div>
 </section>

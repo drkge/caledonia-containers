@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 ---
 
 <footer
-  class="flex flex-col items-center container mx-auto p-10 text-center gap-6 pb-40"
+  class="flex flex-col items-center container mx-auto px-10 text-center gap-6 pb-10"
 >
 
 
@@ -54,7 +54,18 @@ import { Image } from "astro:assets";
   </div>
 
 <p>Built by <a href="https://wolfdev.co.uk" class="hover:underline underline-offset-4 hover:text-ppurlple">wolfdev.co.uk</a>.</p>
-  
 
-  
+
+
 </footer>
+
+
+<div class="grid grid-cols-3 overflow-scroll items-center w-full px-5 md:px-10 py-2">
+  <a href="/home" class="text-center hover:underline underline-offset-4 hover:text-ppurlple">Home</a>
+  <div class="flex flex-row justify-between">
+    <span>|</span>
+    <a href="/sitemap" class="hover:underline underline-offset-4 hover:text-ppurlple">Sitemap</a>
+    <span>|</span>
+  </div>
+  <a href="/services" class="text-center hover:underline underline-offset-4 hover:text-ppurlple">Services</a>
+</div>
