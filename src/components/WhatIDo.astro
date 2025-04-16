@@ -3,19 +3,13 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("service")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 
+import { Image } from "astro:assets";
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/*.{jpeg,jpg,png,gif,webp}"
 );
 
-const bgClasses = [
-  "bg-pgreen rounded-full",
-  "bg-pblue rounded-2xl",
-  "bg-ppink ",
-  "bg-pyellow rounded-md",
-];
+const bgClasses = ["rounded-full", "rounded-2xl", "", "rounded-md"];
 
 const getRandomClass = () => {
   return bgClasses[Math.floor(Math.random() * bgClasses.length)];
