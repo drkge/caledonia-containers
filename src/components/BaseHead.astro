@@ -13,22 +13,95 @@ import { ClientRouter } from "astro:transitions";
 const { title, description, image = "/screenshot.jpg" } = Astro.props;
 ---
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HZ05ZLFQXS"
+></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-HZ05ZLFQXS");
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href="/fonts/Alexandria-Bold.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-Bold.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-Light.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-Light.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-Regular.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-Regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/Alexandria-SemiBold.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/Kablammo-Regular.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/Kablammo-Regular.woff" as="font" type="font/woff" crossorigin />
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Bold.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Light.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Light.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-Regular.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-SemiBold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Alexandria-SemiBold.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Kablammo-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Kablammo-Regular.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
 
 <!-- Page Title -->
 <title>{title}</title>
@@ -39,10 +112,24 @@ const { title, description, image = "/screenshot.jpg" } = Astro.props;
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 <!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/site.webmanifest">
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/favicon/apple-touch-icon.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/favicon/favicon-32x32.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="/favicon/favicon-16x16.png"
+/>
+<link rel="manifest" href="/favicon/site.webmanifest" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
