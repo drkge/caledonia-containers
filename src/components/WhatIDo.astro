@@ -4,6 +4,11 @@ const posts = (await getCollection("service")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
+);
 
 const bgClasses = [
   "bg-pgreen rounded-full",
@@ -18,25 +23,36 @@ const getRandomClass = () => {
 ---
 
 <section class="flex flex-col text-center gap-6">
-
   <div>
     <h1 class="text-3xl md:text-6xl font-semibold text-shadow text-center">
-      <span class="font-kablamo text-pblue">H</span>ow we can help you</h1>
+      <span class="font-kablamo text-pblue">H</span>ow we can help you
+    </h1>
   </div>
 
-
-  <p class="text-pblack">Our comprehensive suite of skip professional services caters to a diverse clientele, ranging from homeowners to commercial developers.</p>
+  <p class="text-pblack">
+    Our comprehensive suite of skip professional services caters to a diverse
+    clientele, ranging from homeowners to commercial developers.
+  </p>
   <div class="flex flex-wrap justify-center gap-6 py-10">
     {
       posts.map((post) => {
         const randomClass = getRandomClass();
         return (
-          <a href={`/services/${post.id}/`} class="w-72 text-left rounded-3xl border-1 border-black shadow-card group hover:shadow-hover transition  px-4 py-6 flex flex-col gap-6">
+          <a
+            href={`/services/${post.id}/`}
+            class="w-72 text-left rounded-3xl border-1 border-black shadow-card group hover:shadow-hover transition  px-4 py-6 flex flex-col gap-6"
+          >
             <div class="flex flex-col gap-4">
               <div
-                class={`${randomClass} text-4xl p-2 self-start border-1 border-black shadow-card1 group-hover:shadow-card transition`}
+                class={`bg-[#fff] ${randomClass} text-4xl p-2 self-start border-1 border-black shadow-card1 group-hover:shadow-card transition overflow-hidden`}
               >
-                <Icon name={post.data.icon} />
+                <Image
+                  class="object-contain group-hover:scale-105 transition"
+                  src={images[`/src/assets/${post.data.icon}.png`]()}
+                  alt="skip manufacturer uk logo"
+                  width={65}
+                  height={65}
+                />
               </div>
               <h4 class="text-xl font-semibold">{post.data.title}</h4>
             </div>

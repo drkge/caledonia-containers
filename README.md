@@ -133,3 +133,7 @@ To run this project locally:
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
+# Updades
+
+Update icons to match skips
