@@ -6,6 +6,45 @@ import Contact from "./Contact.astro";
 
 <header>
   <nav class="flex container mx-auto p-6 items-center justify-center h-20">
+    <!-- MOBILE NAVIGATION -->
+    <div class="md:hidden z-40">
+      <div class="fixed top-0 left-0 right-0 z-50 w-full flex justify-center">
+        <button class="hamburger hamburger--elastic" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+
+      <div
+        id="navigation"
+        class="fixed top-0 left-0 right-0 w-full h-full bg-white transform -translate-y-full transition-transform duration-300 ease-in-out"
+      >
+        <ul
+          class="flex flex-col items-center justify-center h-full gap-4 text-nowrap"
+        >
+          <li><Link href="/" text="Home" style="primary" /></li>
+          <li><Link href="/about" text="Our Journey" style="secondary" /></li>
+          <li>
+            <Link href="/services" text="Our Services" style="tertiary" />
+          </li>
+          <li>
+            <Link href="/contact" text="Contact Us" style="primary" />
+          </li>
+          <li>
+            <Link
+              href="https://skipbits.co.uk"
+              text="Skip Parts"
+              style="secondary"
+            />
+          </li>
+
+          <Contact />
+        </ul>
+      </div>
+    </div>
+
+    <!-- DESKTOP NAVIGATION -->
     <ul class="items-center text-nowrap hidden md:flex">
       <li>
         <Link href="/" text="Home" style="primary" />
@@ -20,40 +59,6 @@ import Contact from "./Contact.astro";
           />
         </li>
       </li>
-      <div class="md:hidden z-40">
-        <button class="hamburger hamburger--elastic" type="button">
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
-
-        <div
-          id="navigation"
-          class="fixed top-0 left-0 w-full h-full bg-white transform -translate-y-full transition-transform duration-300 ease-in-out"
-        >
-          <ul
-            class="flex flex-col items-center justify-center h-full gap-8 text-nowrap"
-          >
-            <li><Link href="/" text="Home" style="primary" /></li>
-            <li><Link href="/about" text="Our Journey" style="secondary" /></li>
-            <li>
-              <Link href="/services" text="Our Services" style="tertiary" />
-            </li>
-            <li>
-              <Link href="/contact" text="Contact Us" style="primary" />
-            </li>
-            <li>
-              <Link
-                href="https://skipbits.co.uk"
-                text="Skip Parts"
-                style="secondary"
-              />
-            </li>
-
-            <Contact />
-          </ul>
-        </div>
-      </div>
     </ul>
   </nav>
   <script is:inline>
