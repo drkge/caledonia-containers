@@ -9,7 +9,13 @@ import Contact from "./Contact.astro";
     <!-- MOBILE NAVIGATION -->
     <div class="md:hidden z-40">
       <div class="fixed top-0 left-0 right-0 z-50 w-full flex justify-center">
-        <button class="hamburger hamburger--elastic" type="button">
+        <button
+          class="hamburger hamburger--elastic"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
           </span>
@@ -24,12 +30,12 @@ import Contact from "./Contact.astro";
           class="flex flex-col items-center justify-center h-full gap-4 text-nowrap"
         >
           <li><Link href="/" text="Home" style="primary" /></li>
-          <li><Link href="/about" text="Our Journey" style="secondary" /></li>
+          <li><Link href="/about/" text="Our Journey" style="secondary" /></li>
           <li>
-            <Link href="/services" text="Our Services" style="tertiary" />
+            <Link href="/services/" text="Our Services" style="tertiary" />
           </li>
           <li>
-            <Link href="/contact" text="Contact Us" style="primary" />
+            <Link href="/contact/" text="Contact Us" style="primary" />
           </li>
           <li>
             <Link
@@ -48,9 +54,9 @@ import Contact from "./Contact.astro";
     <ul class="items-center text-nowrap hidden md:flex">
       <li>
         <Link href="/" text="Home" style="primary" />
-        <li><Link href="/about" text="Our Journey" style="secondary" /></li>
-        <li><Link href="/services" text="Our Services" style="tertiary" /></li>
-        <li><Link href="/contact" text="Contact" style="primary" /></li>
+        <li><Link href="/about/" text="Our Journey" style="secondary" /></li>
+        <li><Link href="/services/" text="Our Services" style="tertiary" /></li>
+        <li><Link href="/contact/" text="Contact" style="primary" /></li>
         <li>
           <Link
             href="https://skipbits.co.uk"
@@ -68,9 +74,14 @@ import Contact from "./Contact.astro";
 
       if (hamburger && menu) {
         hamburger.addEventListener("click", () => {
-          hamburger.classList.toggle("is-active");
+          const open = hamburger.classList.toggle("is-active");
           menu.classList.toggle("-translate-y-full");
           menu.classList.toggle("translate-y-0");
+          hamburger.setAttribute("aria-expanded", String(open));
+          hamburger.setAttribute(
+            "aria-label",
+            open ? "Close navigation menu" : "Open navigation menu"
+          );
         });
       }
     }

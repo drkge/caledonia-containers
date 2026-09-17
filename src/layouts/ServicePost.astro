@@ -3,14 +3,47 @@ import type { CollectionEntry } from "astro:content";
 import BaseHead from "@/components/BaseHead.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import { SITE_TITLE } from "@/consts";
 
-type Props = CollectionEntry<"service">["data"];
+type Props = CollectionEntry<"service">["data"] & {
+  /** Overrides the <title> without touching the visible <h1>. */
+  seoTitle?: string;
+  /** Overrides the meta description without touching the visible copy. */
+  seoDescription?: string;
+  schema?: Record<string, any>[];
+};
 
-const { title = "", description } = Astro.props;
+const {
+  title = "",
+  description,
+  seoTitle,
+  seoDescription,
+  schema = [],
+} = Astro.props;
+
 import { getCollection } from "astro:content";
 const posts = (await getCollection("service")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Home > (Our Services) > This page
+const isService = Astro.url.pathname.startsWith("/services/");
+const trail = [
+  { name: "Home", path: "/" },
+  ...(isService ? [{ name: "Our Services", path: "/services/" }] : []),
+  { name: title, path: Astro.url.pathname },
+];
+
+const breadcrumbs = {
+  "@type": "BreadcrumbList",
+  itemListElement: trail.map((crumb, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: crumb.name,
+    item: new URL(crumb.path, Astro.site).href,
+  })),
+};
+
 const bgClasses = [
   "hover:shadow-predHover",
   "hover:shadow-pyellowHover",
@@ -21,9 +54,13 @@ const getRandomClass = () => {
 };
 ---
 
-<html lang="en">
+<html lang="en-GB">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead
+      title={seoTitle ?? title}
+      description={seoDescription ?? description}
+      schema={[breadcrumbs, ...schema]}
+    />
   </head>
   <body>
     <Header />
@@ -49,7 +86,11 @@ const getRandomClass = () => {
               <slot />
             </div>
 
-            <div class="flex flex-col gap-6" transition:animate="slide">
+            <nav
+              class="flex flex-col gap-6"
+              transition:animate="slide"
+              aria-label="Our services"
+            >
               <ul
                 class="flex flex-col gap-2 pt-10 md:pt-0 items-start md:items-end"
               >
@@ -68,7 +109,7 @@ const getRandomClass = () => {
                 }
               </ul>
               <hr />
-            </div>
+            </nav>
           </div>
         </div>
       </article>

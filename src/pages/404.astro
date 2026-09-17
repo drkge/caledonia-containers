@@ -1,0 +1,51 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <BaseHead
+      title="Page Not Found"
+      description="Sorry, that page doesn't exist. Head back to the home page or browse our skip and container services."
+      noindex
+    />
+  </head>
+  <body>
+    <Header />
+    <main
+      class="container mx-auto md:px-10 py-20 flex flex-col items-center text-center gap-6 px-6"
+    >
+      <h1 class="text-3xl md:text-6xl font-semibold text-shadow">
+        <span class="font-kablamo text-[#E63D24]">P</span>age not found
+      </h1>
+      <p class="text-pblack">
+        Sorry, we couldn&rsquo;t find that page. It may have moved, or the link
+        might be out of date.
+      </p>
+      <div class="flex flex-col md:flex-row gap-6 items-center pt-4">
+        <a
+          href="/"
+          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-yellow-400 text-black hover:bg-yellow-200"
+        >
+          Back to Home
+        </a>
+        <a
+          href="/services/"
+          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-white text-black"
+        >
+          Our Services
+        </a>
+        <a
+          href="/contact/"
+          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-white text-black"
+        >
+          Contact Us
+        </a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

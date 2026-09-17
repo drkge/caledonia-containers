@@ -2,15 +2,73 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import { SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE, BUSINESS } from "../consts";
 
 interface Props {
   title: string;
   description: string;
   image?: string;
+  /** Extra JSON-LD nodes for this page (Service, LocalBusiness, breadcrumbs...). */
+  schema?: Record<string, any>[];
+  /** Keep a page out of the index (used by 404). */
+  noindex?: boolean;
 }
 
-import { ClientRouter } from "astro:transitions";
-const { title, description, image = "/screenshot.jpg" } = Astro.props;
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  image = OG_IMAGE.src,
+  schema = [],
+  noindex = false,
+} = Astro.props;
+
+// Pages that already say the brand name keep their title verbatim; everything
+// else gets the site name appended.
+const pageTitle = title.includes(SITE_TITLE)
+  ? title
+  : `${title} | ${SITE_TITLE}`;
+
+// Build these off `Astro.site` rather than `Astro.url`, so the deployed origin
+// is always the canonical one regardless of where the page is served from.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+
+const organization = {
+  "@type": "Organization",
+  "@id": new URL("/#organization", Astro.site).href,
+  name: BUSINESS.name,
+  legalName: BUSINESS.legalName,
+  url: Astro.site?.href,
+  email: BUSINESS.email,
+  telephone: BUSINESS.telephoneIntl,
+  logo: new URL("/favicon/android-chrome-512x512.png", Astro.site).href,
+  image: new URL(OG_IMAGE.src, Astro.site).href,
+  sameAs: BUSINESS.sameAs,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: BUSINESS.address.street,
+    addressLocality: BUSINESS.address.locality,
+    addressRegion: BUSINESS.address.region,
+    postalCode: BUSINESS.address.postalCode,
+    addressCountry: BUSINESS.address.country,
+  },
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": new URL("/#website", Astro.site).href,
+  url: Astro.site?.href,
+  name: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  inLanguage: "en-GB",
+  publisher: { "@id": organization["@id"] },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [organization, website, ...schema],
+};
 ---
 
 <!-- Google Analytics (gtag.js) -->
@@ -30,20 +88,15 @@ const { title, description, image = "/screenshot.jpg" } = Astro.props;
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#E63D24" />
 
-<!-- Font preloads -->
+<!-- Font preloads. woff2 only: every browser that supports preload also
+     supports woff2, so preloading the woff fallbacks doubles the bytes. -->
 <link
   rel="preload"
   href="/fonts/Alexandria-Bold.woff2"
   as="font"
   type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Alexandria-Bold.woff"
-  as="font"
-  type="font/woff"
   crossorigin
 />
 <link
@@ -55,23 +108,9 @@ const { title, description, image = "/screenshot.jpg" } = Astro.props;
 />
 <link
   rel="preload"
-  href="/fonts/Alexandria-Light.woff"
-  as="font"
-  type="font/woff"
-  crossorigin
-/>
-<link
-  rel="preload"
   href="/fonts/Alexandria-Regular.woff2"
   as="font"
   type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Alexandria-Regular.woff"
-  as="font"
-  type="font/woff"
   crossorigin
 />
 <link
@@ -83,32 +122,26 @@ const { title, description, image = "/screenshot.jpg" } = Astro.props;
 />
 <link
   rel="preload"
-  href="/fonts/Alexandria-SemiBold.woff"
-  as="font"
-  type="font/woff"
-  crossorigin
-/>
-<link
-  rel="preload"
   href="/fonts/Kablammo-Regular.woff2"
   as="font"
   type="font/woff2"
   crossorigin
 />
-<link
-  rel="preload"
-  href="/fonts/Kablammo-Regular.woff"
-  as="font"
-  type="font/woff"
-  crossorigin
-/>
 
 <!-- Page Title -->
-<title>{title}</title>
+<title>{pageTitle}</title>
 <ClientRouter />
-<!-- Title & Description -->
-<meta name="title" content={title} />
+<!-- Description & canonical -->
 <meta name="description" content={description} />
+{
+  /* 404.html is served for any missing path, so a self-referencing
+     canonical there would point at the wrong URL. */
+  noindex ? (
+    <meta name="robots" content="noindex, follow" />
+  ) : (
+    <link rel="canonical" href={canonicalURL} />
+  )
+}
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 <!-- Favicons -->
@@ -133,14 +166,22 @@ const { title, description, image = "/screenshot.jpg" } = Astro.props;
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:width" content={String(OG_IMAGE.width)} />
+<meta property="og:image:height" content={String(OG_IMAGE.height)} />
+<meta property="og:image:alt" content={OG_IMAGE.alt} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={pageTitle} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={socialImage} />
+
+<!-- Structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

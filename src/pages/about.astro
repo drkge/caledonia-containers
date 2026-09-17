@@ -2,6 +2,9 @@
 import Layout from '@/layouts/ServicePost.astro';
 const tags = ['skips', 'skip refurbishment', 'part exchange', 'sheeting systems', 'new skips', 'skip parts', 'roll-on roll-on skips', 'wheelie bins', 'containers', 'new containers', 'container refurbishment' ];
 const description = `How did we get here?`;
+const seoTitle = 'About Caledonia Containers | Skip Manufacturer in Ayrshire';
+const seoDescription =
+	'Caledonia Containers manufactures, refurbishes and repairs skips and waste containers across Scotland, from builders’ skips to roll-on-off compactors.';
 
 import ImageRender from "@/components/ImageRender.astro";
 ---
@@ -11,6 +14,8 @@ import ImageRender from "@/components/ImageRender.astro";
 	icon="beach"
 	title="How Did We Get Here?"
 	description= {description}
+	seoTitle={seoTitle}
+	seoDescription={seoDescription}
 	pubDate={new Date('August 08 2021')}
 >
 	<p>
@@ -53,7 +58,7 @@ import ImageRender from "@/components/ImageRender.astro";
 	/>
 
 	<p>
-		Please feel free to <a href="/contact">contact us</a> for further information or inquire about your specific equipment needs.
+		Please feel free to <a href="/contact/">contact us</a> for further information or inquire about your specific equipment needs.
 	</p>
 
 

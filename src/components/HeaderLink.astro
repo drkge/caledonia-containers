@@ -26,9 +26,14 @@ const getType = (style: Type) => {
   return types[style] || "";
 };
 
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
+// Paths are emitted with a trailing slash, so strip it before comparing.
+const trim = (path: string) => (path.length > 1 ? path.replace(/\/+$/, "") : path);
+const pathname = trim(
+  Astro.url.pathname.replace(import.meta.env.BASE_URL, "")
+);
+const target = trim(href);
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
+const isActive = target === pathname || target === "/" + (subpath?.[0] || "");
 ---
 
 <a
