@@ -1,7 +1,7 @@
 // Global site data. Anything that appears both as visible copy and in
 // structured data lives here so the two can't drift apart.
 
-export const SITE_URL = "https://www.caledoniacontainers.co.uk";
+export const SITE_URL = "https://caledoniacontainers.co.uk";
 
 export const SITE_TITLE = "Caledonia Containers";
 export const SITE_DESCRIPTION =

@@ -1,6 +1,6 @@
 # Caledonia Containers
 
-Website for [Caledonia Containers Ltd](https://www.caledoniacontainers.co.uk) — skip manufacturing,
+Website for [Caledonia Containers Ltd](https://caledoniacontainers.co.uk) — skip manufacturing,
 refurbishment and container services in Lugton, Ayrshire.
 
 A static [Astro](https://astro.build) site styled with Tailwind CSS 4, deployed to GitHub Pages.
