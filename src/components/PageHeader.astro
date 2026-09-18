@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import type { Crumb } from "@/lib/schema";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  trail: Crumb[];
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+const { eyebrow, title, lead, trail, image, imageAlt = "" } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-steel-950 text-white">
+  <div class="grid-lines absolute inset-0" aria-hidden="true"></div>
+  <div
+    class:list={[
+      "wrap relative grid gap-10 py-12 lg:py-16",
+      image && "lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14",
+    ]}
+  >
+    <div>
+      <Breadcrumbs trail={trail} />
+      {eyebrow && <p class="eyebrow mt-8 text-hazard">{eyebrow}</p>}
+      <h1
+        class:list={[
+          "font-display text-5xl leading-[0.95] font-bold tracking-tight uppercase sm:text-6xl",
+          eyebrow ? "mt-3" : "mt-8",
+        ]}
+      >
+        {title}
+      </h1>
+      {lead && <p class="mt-6 max-w-xl text-lg leading-relaxed text-steel-300">{lead}</p>}
+      <slot />
+    </div>
+    {
+      image && (
+        <div class="relative">
+          <div class="absolute -right-3 -bottom-3 hidden h-2/3 w-2/3 rounded-lg bg-brand-500 sm:block" aria-hidden="true" />
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[600, 900, 1200]}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="relative aspect-[4/3] w-full rounded-lg object-cover shadow-2xl"
+          />
+        </div>
+      )
+    }
+  </div>
+  <div class="hazard-stripes relative h-1.5" aria-hidden="true"></div>
+</section>

@@ -1,98 +1,146 @@
-/* The integration's default injected base.css file */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Black.woff2') format('woff2'),
-         url('/fonts/Alexandria-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+/* Self-hosted Barlow: Condensed for display type, regular width for text.
+   Latin subset only; fontsource ships font-display: swap. */
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-500.css";
+@import "@fontsource/barlow/latin-600.css";
+@import "@fontsource/barlow/latin-700.css";
+@import "@fontsource/barlow-condensed/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-700.css";
+
+@theme {
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Barlow", ui-sans-serif, sans-serif;
+
+  /* Brand red. 500 is the logo red: use it for large type and decoration.
+     600 is the accessible step for buttons and small text on white (5.3:1).
+     400 is for small text on the dark steel backgrounds. */
+  --color-brand-50: #fef3f1;
+  --color-brand-100: #fde3de;
+  --color-brand-400: #f26a52;
+  --color-brand-500: #e63d24;
+  --color-brand-600: #c9321b;
+  --color-brand-700: #a82815;
+
+  /* Safety yellow — accents only, never body text on white. */
+  --color-hazard: #facc15;
+
+  /* Cool neutral "steel" scale. */
+  --color-steel-50: #f5f6f7;
+  --color-steel-100: #eceef0;
+  --color-steel-200: #dde1e5;
+  --color-steel-300: #c3c9cf;
+  --color-steel-400: #8f98a1;
+  --color-steel-500: #66707a;
+  --color-steel-600: #4b545d;
+  --color-steel-700: #353c43;
+  --color-steel-800: #22282e;
+  --color-steel-900: #161b20;
+  --color-steel-950: #0e1216;
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Bold.woff2') format('woff2'),
-         url('/fonts/Alexandria-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+/* Cross-document view transitions: the old ClientRouter behaviour, no JS. */
+@view-transition {
+  navigation: auto;
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-ExtraBold.woff2') format('woff2'),
-         url('/fonts/Alexandria-ExtraBold.woff') format('woff');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-white font-sans text-steel-700 antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand-600);
+    outline-offset: 3px;
+  }
+  /* Anchor targets shouldn't hide under the sticky header. */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-ExtraLight.woff2') format('woff2'),
-         url('/fonts/Alexandria-ExtraLight.woff') format('woff');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
+@utility wrap {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Light.woff2') format('woff2'),
-         url('/fonts/Alexandria-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+@utility eyebrow {
+  @apply font-sans text-xs font-semibold tracking-[0.18em] uppercase;
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Medium.woff2') format('woff2'),
-         url('/fonts/Alexandria-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+@utility hazard-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-hazard) 0 12px,
+    var(--color-steel-950) 12px 24px
+  );
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Regular.woff2') format('woff2'),
-         url('/fonts/Alexandria-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-base font-semibold whitespace-nowrap transition-colors duration-150;
+  }
+  .btn-primary {
+    @apply bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-dark {
+    @apply bg-steel-950 text-white hover:bg-steel-800;
+  }
+  .btn-outline {
+    @apply border border-steel-300 bg-white text-steel-900 hover:border-steel-900;
+  }
+  /* For dark sections. */
+  .btn-outline-light {
+    @apply border border-white/30 text-white hover:border-white hover:bg-white/5;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-steel-950 focus:shadow-lg;
+  }
+
+  /* Long-form copy in service pages, about, etc. */
+  .prose {
+    --tw-prose-body: var(--color-steel-700);
+    --tw-prose-headings: var(--color-steel-950);
+    --tw-prose-lead: var(--color-steel-600);
+    --tw-prose-links: var(--color-brand-600);
+    --tw-prose-bold: var(--color-steel-900);
+    --tw-prose-bullets: var(--color-brand-500);
+    --tw-prose-counters: var(--color-steel-500);
+    --tw-prose-hr: var(--color-steel-200);
+    --tw-prose-captions: var(--color-steel-500);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose :where(h2, h3):not(:where(.not-prose, .not-prose *)) {
+    @apply font-display font-bold tracking-tight;
+  }
+  .prose :where(h2):not(:where(.not-prose, .not-prose *)) {
+    @apply text-3xl;
+  }
+  .prose :where(h3):not(:where(.not-prose, .not-prose *)) {
+    @apply text-2xl;
+  }
 }
 
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-SemiBold.woff2') format('woff2'),
-         url('/fonts/Alexandria-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Thin.woff2') format('woff2'),
-         url('/fonts/Alexandria-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kablammo';
-    src: url('/fonts/Kablammo-Regular.woff2') format('woff2'),
-         url('/fonts/Kablammo-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-body {
-    font-family: 'Alexandria', sans-serif;
-    background-color: #f2f2f2;
+/* Faint blueprint grid for plain dark bands. */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
 }

@@ -1,51 +1,53 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { BUSINESS, TEL_HREF } from "@/consts";
+
+const services = (await getCollection("service")).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<!doctype html>
-<html lang="en-GB">
-  <head>
-    <BaseHead
-      title="Page Not Found"
-      description="Sorry, that page doesn't exist. Head back to the home page or browse our skip and container services."
-      noindex
-    />
-  </head>
-  <body>
-    <Header />
-    <main
-      class="container mx-auto md:px-10 py-20 flex flex-col items-center text-center gap-6 px-6"
-    >
-      <h1 class="text-3xl md:text-6xl font-semibold text-shadow">
-        <span class="font-kablamo text-[#E63D24]">P</span>age not found
+<BaseLayout
+  title="Page Not Found"
+  description="Sorry, that page doesn't exist. Head back to the home page or browse our skip and container services."
+  noindex
+>
+  <section class="relative overflow-hidden bg-steel-950 text-white">
+    <div class="grid-lines absolute inset-0" aria-hidden="true"></div>
+    <div class="wrap relative py-24 sm:py-32">
+      <p class="font-display text-8xl leading-none font-bold text-brand-500 sm:text-9xl" aria-hidden="true">404</p>
+      <h1 class="mt-4 font-display text-5xl leading-none font-bold tracking-tight uppercase sm:text-6xl">
+        Page not found
       </h1>
-      <p class="text-pblack">
-        Sorry, we couldn&rsquo;t find that page. It may have moved, or the link
-        might be out of date.
+      <p class="mt-6 max-w-xl text-lg text-steel-300">
+        Sorry — we couldn't find that page. It may have moved, or the link might be out of date.
       </p>
-      <div class="flex flex-col md:flex-row gap-6 items-center pt-4">
-        <a
-          href="/"
-          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-yellow-400 text-black hover:bg-yellow-200"
-        >
-          Back to Home
-        </a>
-        <a
-          href="/services/"
-          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-white text-black"
-        >
-          Our Services
-        </a>
-        <a
-          href="/contact/"
-          class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-white text-black"
-        >
-          Contact Us
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="/" class="btn btn-primary">Back to home</a>
+        <a href={TEL_HREF} class="btn btn-outline-light">
+          <Icon name="lucide:phone" class="size-4" />
+          {BUSINESS.telephoneDisplay}
         </a>
       </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+    </div>
+    <div class="hazard-stripes relative h-1.5" aria-hidden="true"></div>
+  </section>
+
+  <section class="py-16" aria-labelledby="try-heading">
+    <div class="wrap">
+      <h2 id="try-heading" class="eyebrow text-steel-500">Were you looking for one of these?</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((s) => (
+            <li>
+              <a href={`/services/${s.id}/`} class="flex items-center justify-between rounded-lg border border-steel-200 px-5 py-4 font-semibold text-steel-900 transition hover:border-steel-900">
+                {s.data.title}
+                <Icon name="lucide:arrow-right" class="size-4 text-brand-600" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

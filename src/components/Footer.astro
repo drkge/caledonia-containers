@@ -1,58 +1,92 @@
 ---
-const today = new Date();
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
-import Contact from "./Contact.astro";
-import { Image } from "astro:assets";
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
-);
+import Logo from "./Logo.astro";
+import { BUSINESS, SHOPS, TEL_HREF, MAILTO_HREF, DIRECTIONS_HREF } from "@/consts";
+
+const services = (await getCollection("service")).sort((a, b) => a.data.order - b.data.order);
+const year = new Date().getFullYear();
+const heading = "eyebrow mb-5 text-white";
+const link = "transition-colors hover:text-white";
 ---
 
-<footer
-  class="flex flex-col items-center container mx-auto px-10 text-center gap-6 p-10"
->
+<footer class="bg-steel-950 text-steel-300">
+  <div class="hazard-stripes h-1.5" aria-hidden="true"></div>
 
+  <div class="wrap grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.85fr_0.85fr_1.5fr]">
+    <div class="max-w-xs">
+      <Logo tone="light" />
+      <p class="mt-6 leading-relaxed">
+        Skip manufacturing, refurbishment and repairs for waste carriers across Scotland — plus
+        shot blasting, painting and spare parts under one roof.
+      </p>
+      <a
+        href={BUSINESS.linkedin}
+        class="mt-6 inline-flex size-10 items-center justify-center rounded-md border border-white/15 transition-colors hover:border-white hover:text-white"
+        aria-label="Caledonia Containers on LinkedIn"
+      >
+        <Icon name="lucide:linkedin" class="size-5" />
+      </a>
+    </div>
 
-  <Contact />
+    <nav aria-labelledby="footer-services">
+      <h2 id="footer-services" class={heading}>Services</h2>
+      <ul class="space-y-3">
+        {services.map((s) => <li><a href={`/services/${s.id}/`} class={link}>{s.data.title}</a></li>)}
+      </ul>
+    </nav>
 
+    <nav aria-labelledby="footer-company">
+      <h2 id="footer-company" class={heading}>Company</h2>
+      <ul class="space-y-3">
+        <li><a href="/about/" class={link}>About us</a></li>
+        <li><a href="/services/" class={link}>All services</a></li>
+        <li><a href="/contact/" class={link}>Contact</a></li>
+        {
+          SHOPS.map((shop) => (
+            <li>
+              <a href={shop.href} class:list={[link, "inline-flex items-center gap-1"]}>
+                {shop.name}
+                <Icon name="lucide:arrow-up-right" class="size-3.5 text-steel-500" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
 
-  
-
-  {today.getFullYear()} Caledonia Containers is owned and operated by Caledonia Containers Ltd.
-  <div class="flex items-center gap-6 text-5xl">
-    <a
-      href="https://dustybins.co.uk"
-      target="_blank"
-      class=" h-16 w-16 rounded-md border-1 border-black shadow-card hover:shadow-hover transition relative flex items-center justify-center"
-    >
-
-    <Image
-    class="object-cover absolute hover:scale-105 transition h-14 w-14"
-    src={images["/src/assets/dustybins.webp"]()}
-    alt="dusty bins logo"
-    />
-
-    </a>
-    <a
-      href="https://www.linkedin.com/in/grahamsmuk/"
-      target="_blank"
-      class="border-1 border-black  p-1 rounded-full bg-pblue shadow-card hover:shadow-hover transition"
-    >
-      <Icon name="linkedin" />
-    </a>
-
-   <a
-      href="https://skipbits.co.uk"
-      target="_blank"
-      class=" h-16 w-16 rounded-md  border-1 border-black bg-white shadow-card hover:shadow-hover transition relative flex items-center justify-center"
-    >
-    <Image
-    class="object-cover absolute hover:scale-105 transition h-14 w-14"
-    src={images["/src/assets/skipbits.png"]()}
-    alt="skip bits logo"
-    />
-    </a>
+    <div>
+      <h2 class={heading}>Get in touch</h2>
+      <address class="space-y-4 not-italic">
+        <p class="flex gap-3">
+          <Icon name="lucide:map-pin" class="mt-1 size-4 shrink-0 text-brand-400" />
+          <span>
+            {BUSINESS.legalName}<br />
+            {BUSINESS.addressLines.map((line, i) => <>{line}{i < BUSINESS.addressLines.length - 1 && <br />}</>)}
+          </span>
+        </p>
+        <p class="flex gap-3">
+          <Icon name="lucide:phone" class="mt-1 size-4 shrink-0 text-brand-400" />
+          <a href={TEL_HREF} class:list={[link, "font-semibold text-white"]}>{BUSINESS.telephoneDisplay}</a>
+        </p>
+        <p class="flex gap-3">
+          <Icon name="lucide:mail" class="mt-1 size-4 shrink-0 text-brand-400" />
+          <a href={MAILTO_HREF} class={link}>{BUSINESS.email}</a>
+        </p>
+        <p class="pl-7">
+          <a href={DIRECTIONS_HREF} class="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
+            Get directions
+            <Icon name="lucide:arrow-up-right" class="size-4" />
+          </a>
+        </p>
+      </address>
+    </div>
   </div>
 
-<p>Built by <a href="https://wolfdev.co.uk" class="hover:underline underline-offset-4 hover:text-ppurlple">wolfdev.co.uk</a>.</p>
+  <div class="border-t border-white/10">
+    <div class="wrap flex flex-col gap-2 py-6 text-sm text-steel-400 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {year} {BUSINESS.legalName}. All rights reserved.</p>
+      <p>Website by <a href="https://wolfdev.co.uk" class={link}>wolfdev.co.uk</a></p>
+    </div>
+  </div>
 </footer>

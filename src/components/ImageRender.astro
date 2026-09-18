@@ -1,23 +1,30 @@
 ---
+// A single photo inside MDX copy. `source` is a path under src/assets.
 import { Image } from "astro:assets";
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
-);
-const {
-  source = "",
-  alt = "",
-} = Astro.props;
-const skipImage = await images[source]();
 
+interface Props {
+  source: string;
+  alt: string;
+  caption?: string;
+}
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,webp}"
+);
+const { source, alt, caption } = Astro.props;
+if (!images[source]) throw new Error(`ImageRender: no image at ${source}`);
+const img = (await images[source]()).default;
 ---
 
-
-<div class="border-3 border-black rounded-2xl h-80 w-full shadow-card hover:shadow-hover flex transition relative overflow-hidden">
-  <div class="h-80 w-full absolute flex justify-center items-center">
+<figure class="not-prose my-10">
+  <div class="overflow-hidden rounded-lg bg-steel-100">
     <Image
-      class="object-cover hover:scale-105 transition h-80 w-full"
-      src={skipImage.default}
+      src={img}
       alt={alt}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 1024px) 760px, 100vw"
+      class="aspect-[4/3] w-full object-cover"
     />
   </div>
-</div>
+  {caption && <figcaption class="mt-3 text-sm text-steel-500">{caption}</figcaption>}
+</figure>

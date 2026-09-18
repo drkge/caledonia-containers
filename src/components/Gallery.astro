@@ -1,0 +1,41 @@
+---
+// A row of 2–3 photos inside MDX copy. Portrait shots keep a portrait crop.
+import { Image } from "astro:assets";
+
+interface Props {
+  images: { src: string; alt: string; caption?: string }[];
+}
+
+const all = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*.{jpeg,jpg,png,webp}"
+);
+const items = await Promise.all(
+  Astro.props.images.map(async (item) => {
+    if (!all[item.src]) throw new Error(`Gallery: no image at ${item.src}`);
+    const img = (await all[item.src]()).default;
+    return { ...item, img, portrait: img.height > img.width };
+  })
+);
+const cols = items.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
+// If any shot is portrait, crop the whole row portrait so the tops line up.
+const aspect = items.some((i) => i.portrait) ? "aspect-[3/4]" : "aspect-[4/3]";
+---
+
+<div class:list={["not-prose my-10 grid grid-cols-1 gap-4", cols]}>
+  {
+    items.map(({ img, alt, caption }) => (
+      <figure>
+        <div class="overflow-hidden rounded-lg bg-steel-100">
+          <Image
+            src={img}
+            alt={alt}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 640px) 360px, 100vw"
+            class:list={["w-full object-cover", aspect]}
+          />
+        </div>
+        {caption && <figcaption class="mt-2 text-sm text-steel-500">{caption}</figcaption>}
+      </figure>
+    ))
+  }
+</div>

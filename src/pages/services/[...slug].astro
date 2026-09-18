@@ -1,42 +1,146 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import ServicePost from "@/layouts/ServicePost.astro";
-import { render } from "astro:content";
-import { SITE_URL, BUSINESS } from "@/consts";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { Image, getImage } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import { breadcrumbList, type Crumb } from "@/lib/schema";
+import { SITE_URL, BUSINESS, TEL_HREF, QUOTE_MAILTO_HREF } from "@/consts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("service");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+  const services = await getCollection("service");
+  return services.map((service) => ({ params: { slug: service.id }, props: { service } }));
 }
 
-export const prerender = true;
+interface Props {
+  service: CollectionEntry<"service">;
+}
 
-type Props = CollectionEntry<"service">;
+const { service } = Astro.props;
+const { title, description, heroImage, heroAlt, highlights } = service.data;
+const { Content } = await render(service);
 
-const post = Astro.props;
-const { Content } = await render(post);
+const others = (await getCollection("service"))
+  .filter((s) => s.id !== service.id)
+  .sort((a, b) => a.data.order - b.data.order);
 
-const service = {
+const url = new URL(Astro.url.pathname, SITE_URL).href;
+const trail: Crumb[] = [
+  { name: "Home", href: "/" },
+  { name: "Our services", href: "/services/" },
+  { name: title, href: Astro.url.pathname },
+];
+
+// A real JPEG of the hero for structured data and social cards.
+const shareImage = await getImage({ src: heroImage, width: 1200, format: "jpg" });
+
+const serviceSchema = {
   "@type": "Service",
-  name: post.data.title,
-  description: post.data.description,
-  serviceType: post.data.title,
-  url: new URL(Astro.url.pathname, Astro.site).href,
+  name: title,
+  description,
+  serviceType: title,
+  url,
+  image: new URL(shareImage.src, SITE_URL).href,
   provider: { "@id": `${SITE_URL}/#organization` },
-  areaServed: BUSINESS.areaServed.map((name) => ({
-    "@type": "AdministrativeArea",
-    name,
-  })),
+  areaServed: BUSINESS.areaServed.map((name) => ({ "@type": "AdministrativeArea", name })),
 };
 ---
 
-<ServicePost
-  {...post.data}
-  seoDescription={post.data.description}
-  schema={[service]}
+<BaseLayout
+  title={title}
+  description={description}
+  image={shareImage.src}
+  schema={[breadcrumbList(trail), serviceSchema]}
 >
-  <Content />
-</ServicePost>
+  <PageHeader
+    trail={trail}
+    eyebrow="Our services"
+    title={title}
+    lead={description}
+    image={heroImage}
+    imageAlt={heroAlt}
+  >
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/contact/" class="btn btn-primary">
+        Request a quote
+        <Icon name="lucide:arrow-right" class="size-4" />
+      </a>
+      <a href={TEL_HREF} class="btn btn-outline-light">
+        <Icon name="lucide:phone" class="size-4" />
+        {BUSINESS.telephoneDisplay}
+      </a>
+    </div>
+  </PageHeader>
+
+  <div class="wrap grid gap-14 py-16 lg:grid-cols-[minmax(0,1fr)_21rem] lg:gap-16 lg:py-20">
+    <article>
+      {
+        highlights.length > 0 && (
+          <section aria-labelledby="glance-heading" class="rounded-lg border border-steel-200 bg-steel-50 p-6 sm:p-8">
+            <h2 id="glance-heading" class="eyebrow text-brand-600">At a glance</h2>
+            <ul class="mt-5 grid gap-4 sm:grid-cols-2">
+              {highlights.map((point) => (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-500 text-white">
+                    <Icon name="lucide:check" class="size-4" />
+                  </span>
+                  <span class="font-medium text-steel-900">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+      <div class="prose mt-12 max-w-none">
+        <Content />
+      </div>
+    </article>
+
+    <aside class="space-y-6 lg:sticky lg:top-28 lg:self-start">
+      <section class="rounded-lg bg-steel-950 p-7 text-white" aria-labelledby="quote-heading">
+        <h2 id="quote-heading" class="font-display text-3xl leading-none font-bold tracking-tight uppercase">
+          Get a quote
+        </h2>
+        <p class="mt-3 text-steel-300">
+          Tell us what you need and we'll come back to you with a price.
+        </p>
+        <div class="mt-6 grid gap-3">
+          <a href={TEL_HREF} class="btn btn-primary">
+            <Icon name="lucide:phone" class="size-4" />
+            {BUSINESS.telephoneDisplay}
+          </a>
+          <a href={QUOTE_MAILTO_HREF} class="btn btn-outline-light">
+            <Icon name="lucide:mail" class="size-4" />
+            Email us
+          </a>
+        </div>
+      </section>
+
+      <nav class="rounded-lg border border-steel-200 p-6" aria-labelledby="other-heading">
+        <h2 id="other-heading" class="eyebrow text-steel-500">Other services</h2>
+        <ul class="mt-4 space-y-1">
+          {
+            others.map((s) => (
+              <li>
+                <a href={`/services/${s.id}/`} class="group -mx-2 flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-steel-50">
+                  <Image
+                    src={s.data.heroImage}
+                    alt=""
+                    width={96}
+                    height={96}
+                    class="size-12 shrink-0 rounded object-cover"
+                  />
+                  <span class="flex-1 font-semibold text-steel-900 group-hover:text-brand-600">{s.data.title}</span>
+                  <Icon name="lucide:chevron-right" class="size-4 text-steel-400" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+  </div>
+
+  <CtaBand />
+</BaseLayout>

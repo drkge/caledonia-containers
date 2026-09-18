@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import background from "@/assets/partex-1.webp";
+import { BUSINESS, TEL_HREF } from "@/consts";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = "Need skips built, repaired or refurbished?",
+  text = "Tell us what you need — one skip or a whole fleet — and we'll come back to you with a quote.",
+} = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-steel-950" aria-labelledby="cta-heading">
+  <Image
+    src={background}
+    alt=""
+    widths={[800, 1600]}
+    sizes="100vw"
+    class="absolute inset-0 -z-10 size-full object-cover opacity-30"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-steel-950 via-steel-950/90 to-steel-950/40" aria-hidden="true"></div>
+  <div class="wrap flex flex-col gap-8 py-20 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-2xl">
+      <h2 id="cta-heading" class="font-display text-4xl leading-none font-bold tracking-tight text-white uppercase sm:text-5xl">
+        {title}
+      </h2>
+      <p class="mt-5 text-lg text-steel-300">{text}</p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <a href="/contact/" class="btn btn-primary">
+        Request a quote
+        <Icon name="lucide:arrow-right" class="size-4" />
+      </a>
+      <a href={TEL_HREF} class="btn btn-outline-light">
+        <Icon name="lucide:phone" class="size-4" />
+        {BUSINESS.telephoneDisplay}
+      </a>
+    </div>
+  </div>
+</section>

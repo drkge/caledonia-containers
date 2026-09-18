@@ -1,139 +1,52 @@
-# 🌐 Personal Portfolio
+# Caledonia Containers
 
-Welcome to my personal portfolio demo repository! This project is a demonstration of what a personal portfolio could look like. It showcases various aspects of web development, including my work, skills, and projects.
+Website for [Caledonia Containers Ltd](https://www.caledoniacontainers.co.uk) — skip manufacturing,
+refurbishment and container services in Lugton, Ayrshire.
 
-- You can view the deployed project at the following URL: [https://sorolla.netlify.app/](https://sorolla.netlify.app/)
-- Astro web templates: https://astro.build/themes/details/sorollaportfolio/
+A static [Astro](https://astro.build) site styled with Tailwind CSS 4, deployed to GitHub Pages.
 
-## 📂 Project Structure
+## Commands
 
-- **public/**: Contains public assets like images and fonts.
-- **src/**: Includes the source code for the portfolio.
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **astro.config.mjs**: Configuration file for Astro.
-- **package.json**: Lists project dependencies and scripts.
-- **tailwind.config.mjs**: Configuration file for Tailwind CSS.
-- **tsconfig.json**: TypeScript configuration file.
+| Command           | Action                                         |
+| ----------------- | ---------------------------------------------- |
+| `npm install`     | Install dependencies                           |
+| `npm run dev`     | Local dev server at `http://localhost:4321`    |
+| `npm run build`   | Build the production site to `dist/`           |
+| `npm run preview` | Serve the built `dist/` locally                |
 
-### 🧭 /src structure
+## Editing content
 
-The `/src` directory contains the main source code for the project. Below is an overview of its structure:
+- **Business details** — phone, email, address, map coordinates, navigation, workshop capabilities
+  and the online shops all live in [`src/consts.ts`](src/consts.ts). The visible copy and the
+  structured data (JSON-LD) are both generated from it, so change them there.
+- **Services** — one MDX file per service in [`src/content/service/`](src/content/service/). The
+  filename sets the URL (`NewSkips.mdx` → `/services/newskips/`), so don't rename existing files.
+  Frontmatter:
 
-```
-src
-├── assets
-│   ├── about-1.webp
-│   ├── about-2.webp
-│   ├── about-3.webp
-│   ├── dustybins.webp
-│   ├── new-skips-1.webp
-│   ├── new-skips-2.webp
-│   ├── partex-1.webp
-│   ├── partex-2.webp
-│   ├── partex-3.webp
-│   ├── partex-4.webp
-│   ├── refurb-1.webp
-│   ├── refurb-2.webp
-│   ├── refurb-3.webp
-│   ├── partex-4.webp
-│   ├── rollon-1.webp
-│   ├── rollon-2.webp
-│   ├── rollon-3.webp
-│   ├── sheet-1.webp
-│   ├── sheet-2.webp
-│   ├── sheet-3.webp
-│   ├── skip-man.png
-│   ├── skipbits.png
-│   ├── wheelie-1.webp
-│   └── wheelie-2.webp
-├── components
-│   ├── BaseHead.astro
-│   ├── Contact.astro
-│   ├── Footer.astro
-│   ├── FormattedDate.astro
-│   ├── Header.astro
-│   ├── HeaderLink.astro
-│   ├── Hero.astro
-│   └── WhatIDo.astro
-├── consts.ts
-├── content
-│   └── service
-│       └── content in markdown format
-├── content.config.ts
-├── icons
-│   ├── email.svg
-│   ├── four.svg
-│   ├── linkedin.svg
-│   ├── phone.svg
-│   ├── sun.svg
-│   └── web.svg
-├── layouts
-│   └── ServicePost.astro
-├── pages
-│   ├── about.astro
-│   ├── service
-│   │   ├── index.astro
-│   │   └── [...slug].astro
-│   ├── index.astro
-│   └── rss.xml.js
-└── styles
-    ├── global.css
-    └── hamburgers.css
-```
+  ```yaml
+  title: "New Skips"
+  description: "One line — used on cards, the page header and the meta description."
+  order: 1                              # position in grids and menus
+  heroImage: "../../assets/example.webp"
+  heroAlt: "Describe what the photo shows"
+  highlights:                           # the "At a glance" list
+    - "Short point"
+  ```
 
-#### Explanation
+  In the body, use `<ImageRender source="/src/assets/x.webp" alt="…" />` for a single photo,
+  `<Gallery images={[…]} />` for a row of two or three, and `<SpecTable title="…" rows={[…]} />`
+  for specifications.
+- **Photos** — put them in [`src/assets/`](src/assets/). Astro resizes and converts them to WebP at
+  build time, so upload originals.
 
-- **assets**: Contains image files used in the project.
-- **components**: Contains reusable UI components built with Astro.
-- **content**: Contains service content in Markdown format.
-- **content.config.ts**: Configuration file for content collections.
-- **icons**: Contains SVG icon files used in the project.
-- **layouts**: Contains layout components.
-  - `ServicePost.astro`: Layout component for service posts.
-- **pages**: Contains the main pages of the site.
-  - `service/index.astro`: Service index page.
-  - `service/[...slug].astro`: Dynamic route for individual service posts.
-- **styles**: Contains global and component-specific CSS files.
-  - `global.css`: Global styles for the project.
-  - `hamburgers.css`: Styles for the hamburger menu.
+## Deployment
 
-This structure helps in organizing the project files and makes it easier to maintain and scale the project.
+Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which
+builds the site and publishes it to GitHub Pages. The custom domain is set by
+[`public/CNAME`](public/CNAME).
 
-## 🚀 Getting Started
+## SEO
 
-To run this project locally:
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/jramma/sorollaportfolio.git
-   cd sorollaportfolio
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   bun install
-   ```
-
-3. **Start the development server:**
-
-   ```bash
-   bun dev
-   ```
-
-   The application will be available at `http://localhost:4321`.
-
-## 🛠️ Technologies Used
-
-- **Astro**: A modern static site builder.
-- **Tailwind CSS**: A utility-first CSS framework.
-- **TypeScript**: A statically typed programming language.
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-# Updades
-
-Update icons to match skips
+`sitemap-index.xml` and `robots.txt` are generated on build from the `site` URL in
+[`astro.config.mjs`](astro.config.mjs). Every page gets a canonical URL, Open Graph tags and JSON-LD
+(Organization, WebSite, LocalBusiness, Service and BreadcrumbList as appropriate).

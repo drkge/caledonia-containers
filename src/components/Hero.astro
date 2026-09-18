@@ -1,48 +1,50 @@
 ---
 import { Image } from "astro:assets";
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/*.{jpeg,jpg,png,gif,webp}"
-);
+import { Icon } from "astro-icon/components";
+import heroImage from "@/assets/new-skips-2.webp";
+import { BUSINESS, TEL_HREF } from "@/consts";
 ---
 
-<section class="py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
-  <div class="flex flex-col gap-6 justify-start items-start md:w-1/2">
-    <h1 class="flex flex-col gap-6 items-start">
-      <span class="text-xl">Caledonia Containers</span>
-      <span class="text-6xl font-bold">Everything For Waste Carriers.</span>
-    </h1>
-    <p>
-      We provide comprehensive metal fabrication services, including skips, shot
-      blasting, welding, repairs, refurbishments, sales, and spare parts. We
-      offer a one-stop solution for all your metal needs.
-    </p>
-    <p>
-      We also offer professional spray painting, modifications, and conversions
-      for all types of containers, trucks, trailers, waste recycling plants, and
-      agricultural equipment.
-    </p>
-    <a
-      href="/contact/"
-      class="px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition bg-yellow-400 text-black hover:bg-yellow-200"
-    >
-      Get In Touch
-    </a>
-  </div>
-  <div
-    class="md:w-1/2 object-contain flex items-center justify-center p-10 group"
-  >
-    <div
-      class="bg-[#E63D24] border-3 border-black rounded-2xl h-52 w-60 shadow-card group-hover:shadow-hover flex transition"
-    >
-      <div class="h-80 w-60 overflow-hidden relative -mt-30 rounded-2xl">
-        <Image
-          class="object-contain absolute bottom-0 transition"
-          src={images["/src/assets/skip-man.png"]()}
-          alt="Grey steel builders' skip with lifting lugs and a cast tipping bar"
-          loading="eager"
-          fetchpriority="high"
-        />
+<section class="relative overflow-hidden bg-steel-950 text-white">
+  <div class="grid-lines absolute inset-0" aria-hidden="true"></div>
+
+  <div class="wrap relative">
+    <div class="py-16 sm:py-20 lg:w-1/2 lg:py-28 lg:pr-10">
+      <p class="eyebrow text-hazard">Skip manufacturer · Lugton, Ayrshire</p>
+      <h1 class="mt-5 font-display text-6xl leading-[0.88] font-bold tracking-tight uppercase sm:text-7xl xl:text-8xl">
+        Everything for <span class="text-brand-500">waste carriers.</span>
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-steel-300">
+        New skips, refurbishment, repairs and spare parts — fabricated, blasted and painted in our
+        own workshop for waste and recycling operators across Scotland.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="/contact/" class="btn btn-primary">
+          Request a quote
+          <Icon name="lucide:arrow-right" class="size-4" />
+        </a>
+        <a href={TEL_HREF} class="btn btn-outline-light">
+          <Icon name="lucide:phone" class="size-4" />
+          Call {BUSINESS.telephoneDisplay}
+        </a>
       </div>
     </div>
   </div>
+
+  <!-- Full-bleed photo: stacked below the copy on small screens, filling the
+       right half edge-to-edge on large ones. -->
+  <div class="relative lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+    <Image
+      src={heroImage}
+      alt="Newly built skips, painted yellow and stacked in the yard ready for delivery"
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="aspect-[4/3] w-full object-cover sm:aspect-[16/9] lg:aspect-auto lg:h-full"
+    />
+    <div class="absolute inset-y-0 left-0 hidden w-40 bg-gradient-to-r from-steel-950 to-transparent lg:block" aria-hidden="true"></div>
+  </div>
+
+  <div class="hazard-stripes relative h-1.5" aria-hidden="true"></div>
 </section>
