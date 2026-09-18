@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+import { CAPABILITIES } from "@/consts";
+
+interface Props {
+  columns?: 2 | 4;
+}
+const { columns = 2 } = Astro.props;
+---
+
+<ul class:list={["grid gap-x-8 gap-y-7 sm:grid-cols-2", columns === 4 && "xl:grid-cols-4"]}>
+  {
+    CAPABILITIES.map((c) => (
+      <li class="flex gap-4">
+        <span class="flex size-11 shrink-0 items-center justify-center rounded-md bg-steel-950 text-hazard">
+          <Icon name={c.icon} class="size-5" />
+        </span>
+        <span>
+          <span class="block font-semibold text-steel-950">{c.title}</span>
+          <span class="mt-1 block text-steel-600">{c.text}</span>
+        </span>
+      </li>
+    ))
+  }
+</ul>

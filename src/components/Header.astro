@@ -1,91 +1,142 @@
 ---
-import Link from "./HeaderLink.astro";
-import "../styles/hamburgers.css";
-import Contact from "./Contact.astro";
+import { Icon } from "astro-icon/components";
+import Logo from "./Logo.astro";
+import { NAV, BUSINESS, TEL_HREF, MAILTO_HREF } from "@/consts";
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(href);
 ---
 
-<header>
-  <nav class="flex container mx-auto p-6 items-center justify-center h-20">
-    <!-- MOBILE NAVIGATION -->
-    <div class="md:hidden z-40">
-      <div class="fixed top-0 left-0 right-0 z-50 w-full flex justify-center">
-        <button
-          class="hamburger hamburger--elastic"
-          type="button"
-          aria-label="Open navigation menu"
-          aria-expanded="false"
-          aria-controls="navigation"
-        >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </button>
-      </div>
-
-      <div
-        id="navigation"
-        class="fixed top-0 left-0 right-0 w-full h-full bg-white transform -translate-y-full transition-transform duration-300 ease-in-out"
-      >
-        <ul
-          class="flex flex-col items-center justify-center h-full gap-4 text-nowrap"
-        >
-          <li><Link href="/" text="Home" style="primary" /></li>
-          <li><Link href="/about/" text="Our Journey" style="secondary" /></li>
-          <li>
-            <Link href="/services/" text="Our Services" style="tertiary" />
-          </li>
-          <li>
-            <Link href="/contact/" text="Contact Us" style="primary" />
-          </li>
-          <li>
-            <Link
-              href="https://skipbits.co.uk"
-              text="Skip Parts"
-              style="secondary"
-            />
-          </li>
-
-          <Contact />
-        </ul>
-      </div>
+<div class="hidden bg-steel-950 text-sm text-steel-300 md:block">
+  <div class="wrap flex h-10 items-center justify-between">
+    <p>Skip manufacturer &amp; container specialists · Lugton, Ayrshire</p>
+    <div class="flex items-center gap-6">
+      <a href={MAILTO_HREF} class="inline-flex items-center gap-2 transition-colors hover:text-white">
+        <Icon name="lucide:mail" class="size-4" />
+        {BUSINESS.email}
+      </a>
+      <a href={TEL_HREF} class="inline-flex items-center gap-2 font-semibold text-white transition-colors hover:text-hazard">
+        <Icon name="lucide:phone" class="size-4" />
+        {BUSINESS.telephoneDisplay}
+      </a>
     </div>
+  </div>
+</div>
 
-    <!-- DESKTOP NAVIGATION -->
-    <ul class="items-center text-nowrap hidden md:flex">
-      <li>
-        <Link href="/" text="Home" style="primary" />
-        <li><Link href="/about/" text="Our Journey" style="secondary" /></li>
-        <li><Link href="/services/" text="Our Services" style="tertiary" /></li>
-        <li><Link href="/contact/" text="Contact" style="primary" /></li>
+<header class="sticky top-0 z-50 border-b border-steel-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+  <div class="wrap flex h-18 items-center justify-between gap-6">
+    <Logo />
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                class="relative rounded-md px-4 py-2 font-semibold text-steel-700 transition-colors hover:text-steel-950 aria-[current=page]:text-steel-950 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-4 aria-[current=page]:after:-bottom-[1.3rem] aria-[current=page]:after:h-0.5 aria-[current=page]:after:bg-brand-500"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
         <li>
-          <Link
+          <a
             href="https://skipbits.co.uk"
-            text="Skip Parts"
-            style="secondary"
-          />
+            class="inline-flex items-center gap-1 rounded-md px-4 py-2 font-semibold text-steel-700 transition-colors hover:text-steel-950"
+          >
+            Skip parts
+            <Icon name="lucide:arrow-up-right" class="size-4 text-steel-400" />
+            <span class="sr-only">(Skip Bits, opens our parts shop)</span>
+          </a>
         </li>
-      </li>
-    </ul>
-  </nav>
-  <script is:inline>
-    function init() {
-      const hamburger = document.querySelector(".hamburger");
-      const menu = document.getElementById("navigation");
+      </ul>
+    </nav>
 
-      if (hamburger && menu) {
-        hamburger.addEventListener("click", () => {
-          const open = hamburger.classList.toggle("is-active");
-          menu.classList.toggle("-translate-y-full");
-          menu.classList.toggle("translate-y-0");
-          hamburger.setAttribute("aria-expanded", String(open));
-          hamburger.setAttribute(
-            "aria-label",
-            open ? "Close navigation menu" : "Open navigation menu"
-          );
-        });
-      }
-    }
-    init();
-    document.addEventListener("astro:after-swap", init);
-  </script>
+    <div class="flex items-center gap-2">
+      <a href="/contact/" class="btn btn-primary hidden sm:inline-flex">Get a quote</a>
+      <a
+        href={TEL_HREF}
+        class="inline-flex size-11 items-center justify-center rounded-md border border-steel-200 text-steel-900 md:hidden"
+        aria-label={`Call us on ${BUSINESS.telephoneDisplay}`}
+      >
+        <Icon name="lucide:phone" class="size-5" />
+      </a>
+      <button
+        type="button"
+        class="group inline-flex size-11 items-center justify-center rounded-md border border-steel-200 text-steel-900 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Menu"
+        data-menu-toggle
+      >
+        <Icon name="lucide:menu" class="size-5 group-aria-expanded:hidden" />
+        <Icon name="lucide:x" class="hidden size-5 group-aria-expanded:block" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="border-t border-steel-200 bg-white lg:hidden" hidden>
+    <nav aria-label="Mobile" class="wrap py-4">
+      <ul class="divide-y divide-steel-100">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                class="flex items-center justify-between py-4 text-lg font-semibold text-steel-900 aria-[current=page]:text-brand-600"
+              >
+                {item.label}
+                <Icon name="lucide:chevron-right" class="size-5 text-steel-400" />
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="https://skipbits.co.uk" class="flex items-center justify-between py-4 text-lg font-semibold text-steel-900">
+            Skip parts shop
+            <Icon name="lucide:arrow-up-right" class="size-5 text-steel-400" />
+          </a>
+        </li>
+      </ul>
+      <div class="mt-4 grid gap-3 pb-2 sm:grid-cols-2">
+        <a href="/contact/" class="btn btn-primary">Get a quote</a>
+        <a href={TEL_HREF} class="btn btn-outline">
+          <Icon name="lucide:phone" class="size-4" />
+          {BUSINESS.telephoneDisplay}
+        </a>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.getElementById("mobile-menu");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Menu");
+    menu.hidden = !open;
+  }
+
+  toggle?.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu && !menu.hidden) {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
+
+  // The menu is lg:hidden, so close it if the window grows past that.
+  matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+    if (e.matches) setOpen(false);
+  });
+</script>

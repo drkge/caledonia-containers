@@ -2,7 +2,11 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
+// Preload only the faces used above the fold. Vite hashes these to the same
+// URLs the fontsource @font-face rules reference, so nothing downloads twice.
+import displayBold from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
+import textRegular from "@fontsource/barlow/files/barlow-latin-400-normal.woff2?url";
+import textSemibold from "@fontsource/barlow/files/barlow-latin-600-normal.woff2?url";
 import { SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE, BUSINESS } from "../consts";
 
 interface Props {
@@ -90,47 +94,13 @@ const jsonLd = {
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#E63D24" />
 
-<!-- Font preloads. woff2 only: every browser that supports preload also
-     supports woff2, so preloading the woff fallbacks doubles the bytes. -->
-<link
-  rel="preload"
-  href="/fonts/Alexandria-Bold.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Alexandria-Light.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Alexandria-Regular.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Alexandria-SemiBold.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/Kablammo-Regular.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
+<!-- Font preloads -->
+<link rel="preload" href={displayBold} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={textRegular} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={textSemibold} as="font" type="font/woff2" crossorigin />
 
 <!-- Page Title -->
 <title>{pageTitle}</title>
-<ClientRouter />
 <!-- Description & canonical -->
 <meta name="description" content={description} />
 {
@@ -145,6 +115,7 @@ const jsonLd = {
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 <!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link
   rel="apple-touch-icon"
   sizes="180x180"

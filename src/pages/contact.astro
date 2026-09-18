@@ -1,87 +1,168 @@
 ---
-import Layout from '@/layouts/ServicePost.astro';
-import { SITE_URL, BUSINESS, OG_IMAGE } from '@/consts';
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import { breadcrumbList, type Crumb } from "@/lib/schema";
+import {
+  SITE_URL,
+  BUSINESS,
+  OG_IMAGE,
+  TEL_HREF,
+  MAILTO_HREF,
+  QUOTE_MAILTO_HREF,
+  DIRECTIONS_HREF,
+} from "@/consts";
 
-const tags = ['skips', 'skip refurbishment', 'part exchange', 'sheeting systems', 'new skips', 'skip parts', 'roll-on roll-on skips', 'wheelie bins', 'containers', 'new containers', 'container refurbishment' ];
-const description = "Get in touch with us";
-const seoTitle = 'Contact Us';
-const seoDescription =
-	`Call ${BUSINESS.telephone} or find us at Caledonia Containers Ltd, 3 Irvine Road, Lugton Bridge, Lugton, Ayrshire KA3 4ED. Skip manufacturing and repairs, Scotland.`;
+const description = `Call ${BUSINESS.telephoneDisplay} or find us at Caledonia Containers Ltd, 3 Irvine Road, Lugton Bridge, Lugton, Ayrshire KA3 4ED. Skip manufacturing and repairs, Scotland.`;
+
+const trail: Crumb[] = [
+  { name: "Home", href: "/" },
+  { name: "Contact", href: "/contact/" },
+];
 
 const localBusiness = {
-	'@type': 'LocalBusiness',
-	'@id': `${SITE_URL}/#localbusiness`,
-	name: BUSINESS.legalName,
-	description: seoDescription,
-	url: `${SITE_URL}/`,
-	image: `${SITE_URL}${OG_IMAGE.src}`,
-	email: BUSINESS.email,
-	telephone: BUSINESS.telephoneIntl,
-	parentOrganization: { '@id': `${SITE_URL}/#organization` },
-	address: {
-		'@type': 'PostalAddress',
-		streetAddress: BUSINESS.address.street,
-		addressLocality: BUSINESS.address.locality,
-		addressRegion: BUSINESS.address.region,
-		postalCode: BUSINESS.address.postalCode,
-		addressCountry: BUSINESS.address.country,
-	},
-	geo: {
-		'@type': 'GeoCoordinates',
-		latitude: BUSINESS.geo.latitude,
-		longitude: BUSINESS.geo.longitude,
-	},
-	areaServed: BUSINESS.areaServed.map((name) => ({
-		'@type': 'AdministrativeArea',
-		name,
-	})),
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}/#localbusiness`,
+  name: BUSINESS.legalName,
+  description,
+  url: `${SITE_URL}/`,
+  image: `${SITE_URL}${OG_IMAGE.src}`,
+  email: BUSINESS.email,
+  telephone: BUSINESS.telephoneIntl,
+  parentOrganization: { "@id": `${SITE_URL}/#organization` },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: BUSINESS.address.street,
+    addressLocality: BUSINESS.address.locality,
+    addressRegion: BUSINESS.address.region,
+    postalCode: BUSINESS.address.postalCode,
+    addressCountry: BUSINESS.address.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: BUSINESS.geo.latitude,
+    longitude: BUSINESS.geo.longitude,
+  },
+  areaServed: BUSINESS.areaServed.map((name) => ({ "@type": "AdministrativeArea", name })),
 };
+
+const channels = [
+  {
+    icon: "lucide:phone",
+    title: "Call us",
+    detail: BUSINESS.telephoneDisplay,
+    text: "The quickest way to reach the team.",
+    href: TEL_HREF,
+    action: "Call now",
+  },
+  {
+    icon: "lucide:mail",
+    title: "Email us",
+    detail: BUSINESS.email,
+    text: "Send details and photos of what you need.",
+    href: MAILTO_HREF,
+    action: "Send an email",
+  },
+  {
+    icon: "lucide:map-pin",
+    title: "Visit us",
+    detail: "Lugton, Ayrshire",
+    text: "3 Irvine Road, Lugton Bridge, KA3 4ED.",
+    href: DIRECTIONS_HREF,
+    action: "Get directions",
+  },
+];
+
+// Helps turn a first email into a usable quote request.
+const quoteChecklist = [
+  "What you need: new build, refurbishment, repair, part exchange or sheeting",
+  "Container type and size — builders' skip, FEL, roll-on roll-off, wheelie bin",
+  "How many you need",
+  "Photos of the current condition, for repairs and refurbishment",
+  "Your preferred colours, livery or logos",
+  "Where the containers are, or where they need to go",
+];
 ---
 
-<Layout
-	tags={tags}
-	icon="beach"
-	title="Get In Touch"
-	description= {description}
-	seoTitle={seoTitle}
-	seoDescription={seoDescription}
-	schema={[localBusiness]}
-	pubDate={new Date('August 08 2021')}
->
-<h3>Caledonia Containers</h3>
-<p>Caledonia Containers Ltd.</p>
+<BaseLayout title="Contact Us" description={description} schema={[breadcrumbList(trail), localBusiness]}>
+  <PageHeader
+    trail={trail}
+    eyebrow="Contact"
+    title="Get in touch"
+    lead="Call, email or visit us in Lugton, Ayrshire. Whether it's a single repair or a whole new fleet, we're happy to help."
+  />
 
+  <section class="relative z-10 -mt-px py-16" aria-label="Ways to contact us">
+    <ul class="wrap grid gap-6 md:grid-cols-3">
+      {
+        channels.map((c) => (
+          <li class="group relative flex flex-col rounded-lg border border-steel-200 bg-white p-7 transition hover:border-steel-300 hover:shadow-lg">
+            <span class="flex size-12 items-center justify-center rounded-md bg-brand-500 text-white">
+              <Icon name={c.icon} class="size-6" />
+            </span>
+            <h2 class="mt-6 eyebrow text-steel-500">{c.title}</h2>
+            <p class="mt-2 font-display text-2xl font-bold tracking-tight text-steel-950">
+              {/* Let a long email address wrap at the @, never mid-word. */}
+              {c.detail.includes("@") ? (
+                <>{c.detail.split("@")[0]}@<wbr />{c.detail.split("@")[1]}</>
+              ) : (
+                c.detail
+              )}
+            </p>
+            <p class="mt-2 text-steel-600">{c.text}</p>
+            <a href={c.href} class="mt-auto inline-flex items-center gap-2 pt-6 font-semibold text-brand-600 after:absolute after:inset-0">
+              {c.action}
+              <Icon name="lucide:arrow-right" class="size-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-<div class="flex flex-col gap-1">
-	<h4>Contact Information</h4>
-	<div>
-		<span>Telephone:</span>
-		<span><a href="tel:07981883340">07981883340</a></span>
-	</div>
+  <section class="pb-20 sm:pb-24" aria-labelledby="quote-heading">
+    <div class="wrap grid gap-10 lg:grid-cols-2 lg:gap-14">
+      <div class="rounded-lg bg-steel-50 p-8 sm:p-10">
+        <p class="eyebrow text-brand-600">Requesting a quote?</p>
+        <h2 id="quote-heading" class="mt-3 font-display text-4xl leading-none font-bold tracking-tight text-steel-950 uppercase">
+          Help us price it quickly
+        </h2>
+        <p class="mt-4 text-steel-600">Include as much of this as you can and we'll get back to you faster:</p>
+        <ul class="mt-6 space-y-3">
+          {
+            quoteChecklist.map((item) => (
+              <li class="flex gap-3">
+                <Icon name="lucide:check" class="mt-1 size-5 shrink-0 text-brand-500" />
+                <span class="text-steel-700">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={QUOTE_MAILTO_HREF} class="btn btn-primary mt-8">
+          <Icon name="lucide:send" class="size-4" />
+          Email a quote request
+        </a>
+      </div>
 
-<div>
-	<span>Email:</span>
-	<span><a href="mailto:caledoniacontainers@msn.com">caledoniacontainers@msn.com</a></span>
-</div>
-</div>
-
-<div>
-	<iframe
-		title="Map showing Caledonia Containers, 3 Irvine Road, Lugton Bridge, Lugton, Ayrshire KA3 4ED"
-		loading="lazy"
-		referrerpolicy="no-referrer-when-downgrade"
-		width="100%"
-		height="300"
-		src="https://maps.google.com/maps?width=300&amp;height=300&amp;hl=en&amp;q=3%20Irvine%20Road,%20Lugton%20Bridge,%20Lugton,%20Ayrshire,%20KA3%204ED&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-	</iframe>
-</div>
-
-<div class="flex flex-col gap-1">
-	<strong>Caledonia Containers Ltd,</strong>
-	<span>3 Irvine Road </span>
-	<span>Lugton Bridge</span>
-	<span>Lugton Ayrshire </span>
-	<span>KA3 4ED</span>
-</div>
-
-</Layout>
+      <div class="flex flex-col overflow-hidden rounded-lg border border-steel-200">
+        <iframe
+          title="Map showing Caledonia Containers, 3 Irvine Road, Lugton Bridge, Lugton, Ayrshire KA3 4ED"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="min-h-80 w-full flex-1 border-0"
+          src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=3%20Irvine%20Road,%20Lugton%20Bridge,%20Lugton,%20Ayrshire,%20KA3%204ED&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        ></iframe>
+        <address class="flex flex-col gap-4 bg-white p-6 not-italic sm:flex-row sm:items-center sm:justify-between">
+          <span class="text-steel-700">
+            <strong class="block font-semibold text-steel-950">{BUSINESS.legalName}</strong>
+            {BUSINESS.addressLines.join(", ")}
+          </span>
+          <a href={DIRECTIONS_HREF} class="btn btn-outline shrink-0">
+            <Icon name="lucide:navigation" class="size-4" />
+            Directions
+          </a>
+        </address>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

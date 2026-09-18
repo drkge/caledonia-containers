@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+import SectionHeading from "./SectionHeading.astro";
+
+// Drawn from the original "About" copy on inspections and fleet care.
+const steps = [
+  {
+    icon: "lucide:scan-search",
+    title: "Inspect",
+    text: "We carry out a thorough inspection of your equipment and report back on its condition, safety and remaining lifespan.",
+  },
+  {
+    icon: "lucide:clipboard-check",
+    title: "Recommend",
+    text: "We suggest tailored solutions — repair, refurbishment, part exchange or new build — to keep your fleet in top condition.",
+  },
+  {
+    icon: "lucide:truck",
+    title: "Restore",
+    text: "Your containers go back into service ready for immediate use, looking professional and built with today's rules on visibility, containment and load restraint in mind.",
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-steel-900 py-20 sm:py-24" aria-labelledby="process-heading">
+  <div class="grid-lines absolute inset-0" aria-hidden="true"></div>
+  <div class="wrap relative">
+    <SectionHeading
+      id="process-heading"
+      tone="dark"
+      eyebrow="Fleet care"
+      title="Keep your fleet working — and looking the part"
+      lead="With waste disposal costs rising, your containers need to earn their keep. Here's how we help."
+    />
+    <ol class="mt-14 grid gap-6 md:grid-cols-3">
+      {
+        steps.map((step, i) => (
+          <li class="relative rounded-lg border border-white/10 bg-white/[0.03] p-8">
+            <div class="flex items-center justify-between">
+              <span class="flex size-12 items-center justify-center rounded-md bg-brand-500 text-white">
+                <Icon name={step.icon} class="size-6" />
+              </span>
+              <span class="font-display text-5xl font-bold text-white/10" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h3 class="mt-6 font-display text-2xl font-bold tracking-tight text-white uppercase">
+              <span class="sr-only">Step {i + 1}: </span>
+              {step.title}
+            </h3>
+            <p class="mt-3 leading-relaxed text-steel-300">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

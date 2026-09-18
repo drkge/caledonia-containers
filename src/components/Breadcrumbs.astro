@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Crumb } from "@/lib/schema";
+
+interface Props {
+  trail: Crumb[];
+}
+const { trail } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-steel-400">
+    {
+      trail.map((crumb, i) => {
+        const last = i === trail.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {i > 0 && <Icon name="lucide:chevron-right" class="size-3.5 text-steel-600" />}
+            {last ? (
+              <span aria-current="page" class="text-steel-200">{crumb.name}</span>
+            ) : (
+              <a href={crumb.href} class="transition-colors hover:text-white">{crumb.name}</a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

@@ -1,42 +1,53 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import WhatIDo from "@/components/WhatIDo.astro";
-import { SITE_URL } from "../../consts";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import Capabilities from "@/components/Capabilities.astro";
+import Process from "@/components/Process.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import { breadcrumbList, type Crumb } from "@/lib/schema";
 
-const title = "Our Services";
-const description =
-  "Skip manufacturing, wheelie bins, roll-on roll-off skips, part exchange, refurbishment and sheeting systems from Caledonia Containers, Ayrshire.";
-
-const breadcrumbs = {
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Our Services",
-      item: `${SITE_URL}/services/`,
-    },
-  ],
-};
+const services = (await getCollection("service")).sort((a, b) => a.data.order - b.data.order);
+const trail: Crumb[] = [
+  { name: "Home", href: "/" },
+  { name: "Our services", href: "/services/" },
+];
 ---
 
-<!doctype html>
-<html lang="en-GB">
-  <head>
-    <BaseHead
-      title={title}
-      description={description}
-      schema={[breadcrumbs]}
-    />
-  </head>
-  <body>
-    <Header />
-    <main class="container mx-auto md:px-10 py-20">
-      <WhatIDo headingLevel="h1" />
-    </main>
-    <Footer />
-  </body>
-</html>
+<BaseLayout
+  title="Our Services"
+  description="Skip manufacturing, wheelie bins, roll-on roll-off skips, part exchange, refurbishment and sheeting systems from Caledonia Containers, Ayrshire."
+  schema={[breadcrumbList(trail)]}
+>
+  <PageHeader
+    trail={trail}
+    eyebrow="Our services"
+    title="Skip & container services"
+    lead="Manufacturing, refurbishment, repair and part exchange for skips and waste containers — plus the covers, bins and parts that go with them."
+  />
+
+  <section class="py-20" aria-label="Services">
+    <div class="wrap grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => <ServiceCard service={service} />)}
+    </div>
+  </section>
+
+  <section class="border-t border-steel-200 bg-steel-50 py-20 sm:py-24" aria-labelledby="capabilities-heading">
+    <div class="wrap">
+      <SectionHeading
+        id="capabilities-heading"
+        eyebrow="In the workshop"
+        title="Everything under one roof"
+        lead="Behind every service is the same workshop and the same team — so fabrication, blasting, painting and repairs are all handled in one place."
+      />
+      <div class="mt-12">
+        <Capabilities columns={4} />
+      </div>
+    </div>
+  </section>
+
+  <Process />
+  <CtaBand />
+</BaseLayout>

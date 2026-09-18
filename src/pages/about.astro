@@ -1,65 +1,112 @@
 ---
-import Layout from '@/layouts/ServicePost.astro';
-const tags = ['skips', 'skip refurbishment', 'part exchange', 'sheeting systems', 'new skips', 'skip parts', 'roll-on roll-on skips', 'wheelie bins', 'containers', 'new containers', 'container refurbishment' ];
-const description = `How did we get here?`;
-const seoTitle = 'About Caledonia Containers | Skip Manufacturer in Ayrshire';
-const seoDescription =
-	'Caledonia Containers manufactures, refurbishes and repairs skips and waste containers across Scotland, from builders’ skips to roll-on-off compactors.';
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Capabilities from "@/components/Capabilities.astro";
+import Process from "@/components/Process.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import { breadcrumbList, type Crumb } from "@/lib/schema";
 
-import ImageRender from "@/components/ImageRender.astro";
+import headerImage from "@/assets/about-3.webp";
+import enclosureImage from "@/assets/about-1.webp";
+import fleetImage from "@/assets/about-2.webp";
+
+const trail: Crumb[] = [
+  { name: "Home", href: "/" },
+  { name: "About us", href: "/about/" },
+];
 ---
 
-<Layout
-	tags={tags}
-	icon="beach"
-	title="How Did We Get Here?"
-	description= {description}
-	seoTitle={seoTitle}
-	seoDescription={seoDescription}
-	pubDate={new Date('August 08 2021')}
+<BaseLayout
+  title="About Caledonia Containers | Skip Manufacturer in Ayrshire"
+  description="Caledonia Containers manufactures, refurbishes and repairs skips and waste containers across Scotland, from builders’ skips to roll-on-off compactors."
+  schema={[breadcrumbList(trail)]}
 >
-	<p>
-		Recognising the scarcity of service, manufacturing, and spare parts resources within the Scottish waste and recycling industry, Caledonia Containers has launched a dedicated division to cater to these specific needs.
-	</p>
+  <PageHeader
+    trail={trail}
+    eyebrow="About us"
+    title="How did we get here?"
+    lead="A dedicated manufacturing, repair and spare-parts operation for Scotland's waste and recycling industry."
+    image={headerImage}
+    imageAlt="A freshly painted red builders' skip in the yard"
+  />
 
-	<p>
-		Our experienced team stands ready to manufacture, refurbish, and repair all types of skips and waste containers, from the smallest builders’ skips to the most extensive roll-on-off compactors. We provide comprehensive inspection, service, fabrication, and repair facilities to ensure your containers remain in pristine condition.
-	</p>
+  <section class="py-20 sm:py-24" aria-labelledby="story-heading">
+    <div class="wrap grid gap-14 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-20">
+      <div class="prose max-w-none">
+        <h2 id="story-heading">Filling a gap in the industry</h2>
+        <p>
+          Recognising how scarce service, manufacturing and spare-parts resources were within the
+          Scottish waste and recycling industry, Caledonia Containers launched a dedicated division
+          to meet those needs.
+        </p>
+        <p>
+          Our experienced team is ready to manufacture, refurbish and repair every type of skip and
+          waste container, from the smallest builders' skips to the largest roll-on roll-off
+          compactors. Our inspection, servicing, fabrication and repair facilities keep your
+          containers in first-class condition.
+        </p>
 
-	<ImageRender
-  source="/src/assets/about-1.webp"
-  alt="open container recently refurbished"
-	/>
+        <h2>More than skips</h2>
+        <p>
+          Alongside our core services we offer steam cleaning, shot blasting, painting, logo
+          application, custom graphics and spare-parts procurement.
+        </p>
 
-	<p>
-		In addition to our core services, we offer steam cleaning, shot blasting, painting, logo application, graphics customization, and spare parts procurement.
-	</p>
+        <h2>Your fleet, inspected</h2>
+        <p>
+          We carry out thorough inspections of our customers' equipment and provide reports on its
+          condition, safety and lifespan. We then suggest tailored solutions to keep your fleet of
+          containers in top condition and ready for immediate use.
+        </p>
+        <p>
+          In today's cost-conscious, competitive market — with waste disposal costs on the rise — it
+          is crucial that your containers project a professional image and keep pace with evolving
+          regulations on visibility, containment, load restraint and transport.
+        </p>
+      </div>
 
-	<p>
-		We conduct thorough inspections of our customers’ equipment, providing valuable reports on its condition, safety, and lifespan. We then suggest tailored solutions to maintain your fleet of containers in top-notch condition, ready for immediate use.
-	</p>
+      <div class="space-y-6">
+        <Image
+          src={enclosureImage}
+          alt="A large container finished in black with high-visibility chevrons, ready for the customer"
+          widths={[400, 640, 840]}
+          sizes="(min-width: 1024px) 416px, 100vw"
+          class="aspect-[3/4] w-full rounded-lg object-cover"
+        />
+        <Image
+          src={fleetImage}
+          alt="A red roll-on roll-off container finished in the customer's livery"
+          widths={[400, 640]}
+          sizes="(min-width: 1024px) 416px, 100vw"
+          class="aspect-[4/3] w-full rounded-lg object-cover"
+        />
+      </div>
+    </div>
+  </section>
 
-	<ImageRender
-  source="/src/assets/about-2.webp"
-  alt="large skip ready for client delivery"
-	/>
+  <!-- Ambition -->
+  <section class="bg-brand-500 py-16 text-white sm:py-20">
+    <figure class="wrap max-w-4xl text-center">
+      <blockquote class="font-display text-3xl leading-tight font-bold tracking-tight uppercase sm:text-5xl">
+        “Our aim is to be Scotland's premier skip manufacturer and container repair facility.”
+      </blockquote>
+      <figcaption class="mt-6 text-lg text-white/85">
+        Committed to exceptional service and support for every customer.
+      </figcaption>
+    </figure>
+  </section>
 
-	<p>
-		In today’s cost-conscious and competitive environment, with rising waste disposal costs, it is crucial that your containers project a professional image and adhere to ever-evolving regulations regarding visibility, containment, load restraint, and transportation.
-	</p>
+  <section class="py-20 sm:py-24" aria-labelledby="offer-heading">
+    <div class="wrap">
+      <SectionHeading id="offer-heading" eyebrow="What we offer" title="One workshop, every job" />
+      <div class="mt-12">
+        <Capabilities columns={4} />
+      </div>
+    </div>
+  </section>
 
-	<p>
-		Caledonia Containers aspires to be Scotland’s premier skip manufacturer and container repair facility, committed to providing exceptional service and support to our valued customers.
-	</p>
-
-	<ImageRender
-  source="/src/assets/about-3.webp"
-  alt="stacked skips which have been fully refurbished"
-	/>
-
-	<p>
-		Please feel free to <a href="/contact/">contact us</a> for further information or inquire about your specific equipment needs.
-	</p>
-
-
-</Layout>
+  <Process />
+  <CtaBand title="Talk to us about your fleet" />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  rows: [label: string, value: string][];
+}
+const { title, rows } = Astro.props;
+---
+
+<div class="not-prose my-10 overflow-hidden rounded-lg border border-steel-200">
+  <div class="flex items-center gap-3 bg-steel-950 px-5 py-4">
+    <span class="h-5 w-1.5 rounded-sm bg-brand-500" aria-hidden="true"></span>
+    <h3 class="font-display text-xl font-bold tracking-wide text-white uppercase">{title}</h3>
+  </div>
+  <dl class="divide-y divide-steel-200">
+    {
+      rows.map(([label, value]) => (
+        <div class="grid gap-1 px-5 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6">
+          <dt class="font-semibold text-steel-900">{label}</dt>
+          <dd class="text-steel-600">{value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
